@@ -6,25 +6,24 @@
 
 import time
 from datetime import datetime, timedelta, date
-from .i18n import ngettext, gettext as _
 
 __all__ = ['naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
 
 # TODO voltar para ingles e corrigir aquivos de locale
 # TODO 2 descobrir qual setembro eh o certo do datetime
-MONTHS = {"Jan": _("janeiro"),
-          "Feb": _("fevereiro"),
-          "Mar": _("março"),
-          "Apr": _("abril"),
-          "May": _("maio"),
-          "Jun": _("junho"),
-          "Jul": _("julho"),
-          "Aug": _("agosto"),
-          "Sep": _("setembro"),
-          "Sept": _("setembro"),
-          "Oct": _("outubro"),
-          "Nov": _("novembro"),
-          "Dec": _("dezembro")}
+MONTHS = {"Jan": "janeiro",
+          "Feb": "fevereiro",
+          "Mar": "março",
+          "Apr": "abril",
+          "May": "maio",
+          "Jun": "junho",
+          "Jul": "julho",
+          "Aug": "agosto",
+          "Sep": "setembro",
+          "Sept": "setembro",
+          "Oct": "outubro",
+          "Nov": "novembro",
+          "Dec": "dezembro"}
 
 def _now():
     return datetime.now()
@@ -77,48 +76,48 @@ def naturaldelta(value, months=True):
 
     if not years and days < 1:
         if seconds == 0:
-            return _("a moment")
+            return "um momento"
         elif seconds == 1:
-            return _("a second")
+            return "um segundo"
         elif seconds < 60:
-            return ngettext("%d second", "%d seconds", seconds) % seconds
+            return ("%d segundo", "%d segundos", seconds) % seconds
         elif 60 <= seconds < 120:
-            return _("a minute")
+            return "um minuto"
         elif 120 <= seconds < 3600:
             minutes = seconds // 60
-            return ngettext("%d minute", "%d minutes", minutes) % minutes
+            return ("%d minuto", "%d minutos", minutes) % minutes
         elif 3600 <= seconds < 3600 * 2:
-            return _("an hour")
+            return "uma hora"
         elif 3600 < seconds:
             hours = seconds // 3600
-            return ngettext("%d hour", "%d hours", hours) % hours
+            return ("%d hora", "%d horas", hours) % hours
     elif years == 0:
         if days == 1:
-            return _("a day")
+            return "um dia"
         if not use_months:
-            return ngettext("%d day", "%d days", days) % days
+            return ("%d dia", "%d dias", days) % days
         else:
             if not months:
-                return ngettext("%d day", "%d days", days) % days
+                return ("%d dia", "%d dias", days) % days
             elif months == 1:
-                return _("a month")
+                return "um mês"
             else:
-                return ngettext("%d month", "%d months", months) % months
+                return ("%d mês", "%d meses", months) % months
     elif years == 1:
         if not months and not days:
-            return _("a year")
+            return "um ano"
         elif not months:
-            return ngettext("1 year, %d day", "1 year, %d days", days) % days
+            return ("1 ano, %d dia", "1 ano, %d dias", days) % days
         elif use_months:
             if months == 1:
-                return _("1 year, 1 month")
+                return "1 ano e 1 mês"
             else:
-                return ngettext("1 year, %d month",
-                                "1 year, %d months", months) % months
+                return ("1 ano e %d mês",
+                                "1 ano e %d meses", months) % months
         else:
-            return ngettext("1 year, %d day", "1 year, %d days", days) % days
+            return ("1 ano e %d dia", "1 ano e %d dias", days) % days
     else:
-        return ngettext("%d year", "%d years", years) % years
+        return ("%d ano", "%d anos", years) % years
 
 
 def naturaltime(value, future=False, months=True):
@@ -136,11 +135,11 @@ def naturaltime(value, future=False, months=True):
     if isinstance(value, (datetime, timedelta)):
         future = date > now
 
-    ago = _('%s from now') if future else _('%s ago')
+    ago = 'em %s' if future else 'há %s'
     delta = naturaldelta(delta, months)
 
-    if delta == _("a moment"):
-        return _("now")
+    if delta == "um momento":
+        return "agora"
 
     return ago % delta
 
@@ -158,13 +157,13 @@ def naturalday(value, hasYear=False):
         return value
     delta = value - date.today()
     if delta.days == 0:
-        return _('today')
+        return 'hoje'
     elif delta.days == 1:
-        return _('tomorrow')
+        return 'amanhã'
     elif delta.days == -1:
-        return _('yesterday')
+        return 'ontem'
     month = MONTHS[value.strftime('%b')]
-    return value.strftime('em %d ' + _('of') + ' ' + month + ' ' + _('of') + ' %Y')
+    return value.strftime('em %d ' + 'de' + ' ' + month + ' ' + 'de' + ' %Y')
 
 def naturalyear(value):
     """For date values that are last year, this year or next year compared to
@@ -180,12 +179,11 @@ def naturalyear(value):
         return value
     delta = value.year - date.today().year
     if delta == 0:
-        # TODO fazer traducoes em ingles
-        return _('este ano')
+        return 'este ano'
     elif delta == 1:
-        return _('ano que vem')
+        return 'ano que vem'
     elif delta == -1:
-        return _('ano passado')
+        return 'ano passado'
     return value.strftime('em %Y')
 
 def naturaldate(value):
