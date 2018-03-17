@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Setup script for humanize."""
-
-from setuptools import setup, find_packages
+try:
+    from setuptools import setup, find_packages
+except ImportError:
+from distutils.core import setup, find_packages
 import sys, os
 import io
 
-version = '0.5.1'
+import humanizer_portugues
 
-# some trove classifiers:
-
+with open('README.rst', 'rb') as readme:
+    readme_text = readme.read().decode('utf-8')
 
 setup(
-    name='humanize',
-    version=version,
-    description="python humanize utilities",
-    long_description=io.open('README.rst', 'r', encoding="UTF-8").read(),
-    # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    name='humanizer-portugues',
+    version=humanizer_portugues.__version__,
+    description="Funções para humanização (humanize) para python ",
+    long_description=readme_text,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -26,13 +26,12 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python',
     ],
-    keywords='humanize time size',
-    author='Jason Moiron',
-    author_email='jmoiron@jmoiron.net',
-
-    url='http://github.com/jmoiron/humanize',
+    keywords='humanize portugues data hora tamanho',
+    maintainer='Thiago Carvalho D Avila',
+    maintainer_email='thiagocavila@gmail.com',
+    url='https://github.com/staticdev/humanizer-portugues',
     license='MIT',
-    packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     test_suite="tests",
