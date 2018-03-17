@@ -5,7 +5,7 @@
 
 from mock import patch
 
-from humanize import time
+from humanizer_portugues import time
 from datetime import date, datetime, timedelta
 from .base import HumanizeTestCase
 

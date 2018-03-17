@@ -3,7 +3,7 @@
 
 """Number tests."""
 
-from humanize import number
+from humanizer_portugues import number
 from .base import HumanizeTestCase
 
 class NumberTestCase(HumanizeTestCase):

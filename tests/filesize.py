@@ -3,7 +3,7 @@
 
 """Tests for filesize humanizing."""
 
-from humanize import filesize
+from humanizer_portugues import filesize
 from .base import HumanizeTestCase
 
 class FilesizeTestCase(HumanizeTestCase):
