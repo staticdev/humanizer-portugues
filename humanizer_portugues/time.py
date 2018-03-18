@@ -80,44 +80,43 @@ def naturaldelta(value, months=True):
         elif seconds == 1:
             return "um segundo"
         elif seconds < 60:
-            return ("%d segundo", "%d segundos", seconds) % seconds
+            return "%d segundos" % seconds
         elif 60 <= seconds < 120:
             return "um minuto"
         elif 120 <= seconds < 3600:
             minutes = seconds // 60
-            return ("%d minuto", "%d minutos", minutes) % minutes
+            return "%d minutos" % minutes
         elif 3600 <= seconds < 3600 * 2:
             return "uma hora"
         elif 3600 < seconds:
             hours = seconds // 3600
-            return ("%d hora", "%d horas", hours) % hours
+            return "%d horas" % hours
     elif years == 0:
         if days == 1:
             return "um dia"
         if not use_months:
-            return ("%d dia", "%d dias", days) % days
+            return "%d dias" % days
         else:
             if not months:
-                return ("%d dia", "%d dias", days) % days
+                return "%d dias" % days
             elif months == 1:
                 return "um mês"
             else:
-                return ("%d mês", "%d meses", months) % months
+                return "%d meses" % months
     elif years == 1:
         if not months and not days:
             return "um ano"
         elif not months:
-            return ("1 ano, %d dia", "1 ano, %d dias", days) % days
+            return "1 ano, %d dias" % days
         elif use_months:
             if months == 1:
                 return "1 ano e 1 mês"
             else:
-                return ("1 ano e %d mês",
-                                "1 ano e %d meses", months) % months
+                return "1 ano e %d meses" % months
         else:
-            return ("1 ano e %d dia", "1 ano e %d dias", days) % days
+            return "1 ano e %d dias" % days
     else:
-        return ("%d ano", "%d anos", years) % years
+        return "%d anos" % years
 
 
 def naturaltime(value, future=False, months=True):

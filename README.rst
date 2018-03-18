@@ -34,13 +34,13 @@ Humanization de inteiros:
     '12,345'
     
     humanizer_portugues.intword(123455913)
-    '123.5 million'
+    '123.5 milhão'
     
     humanizer_portugues.intword(12345591313)
-    '12.3 billion'
+    '12.3 bilhão'
     
     humanizer_portugues.apnumber(4)
-    'four'
+    'quatro'
     
     humanizer_portugues.apnumber(41)
     '41'
@@ -51,25 +51,25 @@ Humanization datas e horas:
 
     import datetime
     humanizer_portugues.naturalday(datetime.datetime.now())
-    'today'
+    'hoje'
     
     humanizer_portugues.naturaldelta(datetime.timedelta(seconds=1001))
-    '16 minutes'
+    '16 minutos'
     
     humanizer_portugues.naturalday(datetime.datetime.now() - datetime.timedelta(days=1))
-    'yesterday'
+    'ontem'
     
     humanizer_portugues.naturalday(datetime.date(2007, 6, 5))
-    'Jun 05'
+    'em 05 de junho'
     
     humanizer_portugues.naturaldate(datetime.date(2007, 6, 5))
-    'Jun 05 2007'
+    'em 05 de junho de 2007'
     
     humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=1))
-    'a second ago'
+    'há um segundo'
     
     humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
-    'an hour ago'
+    'há uma hora'
 
 Humanization de tamanho de arquivos:
 
@@ -109,3 +109,6 @@ Humanization de listas:
 
     humanizer_portugues.list_to_phrase(['Cláudio', 'Maria'], ',', 'e')
     'Cláudio e Maria'
+
+    humanizer_portugues.list_to_phrase(['Cláudio', 'Maria', 'José'], ';', 'ou')
+    'Cláudio; Maria ou José'
