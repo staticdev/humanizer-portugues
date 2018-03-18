@@ -4,7 +4,7 @@
 try:
     from setuptools import setup, find_packages
 except ImportError:
-from distutils.core import setup, find_packages
+    from distutils.core import setup, find_packages
 import sys, os
 import io
 
