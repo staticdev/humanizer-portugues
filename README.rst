@@ -1,8 +1,17 @@
 humanizer-portugues
 ===================
 
-.. image:: https://secure.travis-ci.org/staticdev/humanizer-portugues.png?branch=master
-  :target: http://travis-ci.org/staticdev/humanizer-portugues
+|pyversions| |Travis| |PyPi|
+
+.. |pyversions| image:: https://img.shields.io/pypi/pyversions/humanizer-portugues.svg
+    :target: https://pypi.python.org/pypi/humanizer-portugues
+    :alt: Python versions supported
+
+.. |Travis| image:: https://api.travis-ci.org/staticdev/humanizer-portugues.svg?branch=master
+.. _Travis: https://travis-ci.org/staticdev/humanizer-portugues
+
+.. |PyPi| image:: https://badge.fury.io/py/humanizer-portugues.svg
+.. _PyPi: https://badge.fury.io/py/humanizer-portugues
 
 Este pacote contém várias funções de humanização (humanization), como transformar um número em uma duração legível para humanos ('três minutos atrás') ou em uma frase. Ele funciona em python2 e 3, sendo recomendado o uso da versão mais recente.
 
