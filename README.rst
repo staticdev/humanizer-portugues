@@ -15,7 +15,7 @@ humanizer-portugues
 
 Este pacote contém várias funções de humanização (humanization), como transformar um número em uma duração legível para humanos ('três minutos atrás') ou em uma frase. Ele funciona em python2 e 3, sendo recomendado o uso da versão mais recente.
 
-Este código é baseado no pacote original humanize, com correções de tradução, formato e adição de humanização de listas. Além disso, foi retirado o recurso de localização (i18n) facilitando sua utilização para português.
+Este código é baseado no pacote original humanize_, com atualização para python3, correções de tradução, formato e adição de humanização de listas. Além disso, foi retirado o recurso de localização (i18n) facilitando sua utilização para português.
 
 Instalação
 ----------
@@ -121,3 +121,5 @@ Humanization de listas:
 
     humanizer_portugues.list_to_phrase(['Cláudio', 'Maria', 'José'], ';', 'ou')
     'Cláudio; Maria ou José'
+
+.. _Humanize: https://github.com/jmoiron/humanize
