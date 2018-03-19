@@ -29,6 +29,7 @@ matrix:
     env: PYENV_VERSION=3.5.2
 before_install:
   - chmod +x .travis/install.sh
+  - chmod +x .travis/run.sh
 install:
   - "./.travis/install.sh"
 script:
