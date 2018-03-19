@@ -27,3 +27,7 @@ matrix:
   - os: osx
     language: objective-c
     env: PYENV_VERSION=3.5.2
+install:
+  - "./.travis/install.sh"
+script:
+  - "./.travis/run.sh"
