@@ -49,7 +49,7 @@ class TimeTestCase(HumanizeTestCase):
             '230 days',
             '1 year, 35 days',
         ]
-        with patch('humanize.time._now') as mocked:
+        with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
             nd_nomonths = lambda d: time.naturaldelta(d, months=False)
             self.assertManyResults(nd_nomonths, test_list, result_list)
