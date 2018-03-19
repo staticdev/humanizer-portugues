@@ -20,9 +20,6 @@ matrix:
     env: BUILD_SDIST=true
   - os: linux
     sudo: false
-    python: pypy
-  - os: linux
-    sudo: false
     python: pypy3
   - os: osx
     language: objective-c
