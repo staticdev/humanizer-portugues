@@ -35,7 +35,7 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
 class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time"""
 
-    def test_naturaldelta_nomonths(self):
+    def test_naturaldelta_nomeses(self):
         now = datetime.now()
         test_list = [
             timedelta(days=7),
@@ -44,15 +44,15 @@ class TimeTestCase(HumanizeTestCase):
             timedelta(days=400),
         ]
         result_list = [
-            '7 days',
-            '31 days',
-            '230 days',
-            '1 year, 35 days',
+            '7 dias',
+            '31 dias',
+            '230 dias',
+            '1 ano e 35 dias',
         ]
         with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
-            nd_nomonths = lambda d: time.naturaldelta(d, months=False)
-            self.assertManyResults(nd_nomonths, test_list, result_list)
+            nd_nomeses = lambda d: time.naturaldelta(d, months=False)
+            self.assertManyResults(nd_nomeses, test_list, result_list)
 
     def test_naturaldelta(self):
         now = datetime.now()
@@ -89,34 +89,34 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         result_list = [
-            'a moment',
-            'a second',
-            '30 seconds',
-            'a minute',
-            '2 minutes',
-            'an hour',
-            '23 hours',
-            'a day',
-            '1 year, 4 months',
-            '2 years',
-            'a second',
-            '30 seconds',
-            'a minute',
-            '2 minutes',
-            'an hour',
-            '23 hours',
-            'a day',
-            '1 year, 4 months',
-            '2 years',
-            '27 years',
-            '1 year, 1 month',
-            '30 seconds',
-            '2 years',
-            '1 year, 4 days',
-            'a month',
-            '2 months',
-            '9 days',
-            'a year',
+            'um momento',
+            'um segundo',
+            '30 segundos',
+            'um minuto',
+            '2 minutos',
+            'uma hora',
+            '23 horas',
+            'um dia',
+            '1 ano e 4 meses',
+            '2 anos',
+            'um segundo',
+            '30 segundos',
+            'um minuto',
+            '2 minutos',
+            'uma hora',
+            '23 horas',
+            'um dia',
+            '1 ano e 4 meses',
+            '2 anos',
+            '27 anos',
+            '1 ano e 1 mês',
+            '30 segundos',
+            '2 anos',
+            '1 ano e 4 dias',
+            'um mês',
+            '2 meses',
+            '9 dias',
+            'um ano',
             "NaN",
         ]
         with patch('humanizer_portugues.time._now') as mocked:
@@ -154,30 +154,30 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         result_list = [
-            'now',
-            'a second ago',
-            '30 seconds ago',
-            'a minute ago',
-            '2 minutes ago',
-            'an hour ago',
-            '23 hours ago',
-            'a day ago',
-            '1 year, 4 months ago',
-            '2 years ago',
-            'a second from now',
-            '30 seconds from now',
-            'a minute from now',
-            '2 minutes from now',
-            'an hour from now',
-            '23 hours from now',
-            'a day from now',
-            '1 year, 4 months from now',
-            '2 years from now',
-            '27 years from now',
-            '1 year, 1 month ago',
-            '30 seconds ago',
-            '2 years ago',
-            '1 year, 4 days ago',
+            'agora',
+            'há um segundo',
+            'há 30 segundos',
+            'há um minuto',
+            'há 2 minutos',
+            'há uma hora',
+            'há 23 horas',
+            'há um dia',
+            'há 1 ano e 4 meses',
+            'há 2 anos',
+            'em um segundo',
+            'em 30 segundos',
+            'em um minuto',
+            'em 2 minutos',
+            'em uma hora',
+            'em 23 horas',
+            'em um dia',
+            'em 1 ano e 4 meses',
+            'em 2 anos',
+            'em 27 anos',
+            'há 1 ano e 1 mês',
+            'há 30 segundos',
+            'há 2 anos',
+            'há 1 ano e 4 dias',
             "NaN",
         ]
         with patch('humanizer_portugues.time._now') as mocked:
@@ -217,32 +217,32 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         result_list = [
-            'now',
-            'a second ago',
-            '30 seconds ago',
-            'a minute ago',
-            '2 minutes ago',
-            'an hour ago',
-            '23 hours ago',
-            'a day ago',
-            '17 days ago',
-            '47 days ago',
-            '1 year, 135 days ago',
-            '2 years ago',
-            'a second from now',
-            '30 seconds from now',
-            'a minute from now',
-            '2 minutes from now',
-            'an hour from now',
-            '23 hours from now',
-            'a day from now',
-            '1 year, 135 days from now',
-            '2 years from now',
-            '27 years from now',
-            '1 year, 35 days ago',
-            '30 seconds ago',
-            '2 years ago',
-            '1 year, 4 days ago',
+            'agora',
+            'há um segundo',
+            'há 30 segundos',
+            'há um minuto',
+            'há 2 minutos',
+            'há uma hora',
+            'há 23 horas',
+            'há um dia',
+            'há 17 dias',
+            'há 47 dias',
+            'há 1 ano e 135 dias',
+            'há 2 anos',
+            'em um segundo',
+            'em 30 segundos',
+            'em um minuto',
+            'em 2 minutos',
+            'em uma hora',
+            'em 23 horas',
+            'em um dia',
+            'em 1 ano e 135 dias',
+            'em 2 anos',
+            'em 27 anos',
+            'há 1 ano e 35 dias',
+            'há 30 segundos',
+            'há 2 anos',
+            'há 1 ano e 4 dias',
             "NaN",
         ]
         with patch('humanizer_portugues.time._now') as mocked:
@@ -255,19 +255,17 @@ class TimeTestCase(HumanizeTestCase):
         yesterday = today - one_day
         if today.month != 3:
             someday = date(today.year, 3, 5)
-            someday_result = 'Mar 05'
+            someday_result = '05 de março'
         else:
             someday = date(today.year, 9, 5)
-            someday_result = 'Sep 05'
+            someday_result = '05 de setembro'
         valerrtest = fakedate(290149024, 2, 2)
         overflowtest = fakedate(120390192341, 2, 2)
         test_list = (today, tomorrow, yesterday, someday, '02/26/1984',
-            (date(1982, 6, 27), '%Y.%M.%D'), None, "Not a date at all.",
-            valerrtest, overflowtest
+            None, "Not a date at all.", valerrtest, overflowtest
         )
-        result_list = ('today', 'tomorrow', 'yesterday', someday_result, '02/26/1984',
-            date(1982, 6, 27).strftime('%Y.%M.%D'), None, "Not a date at all.",
-            valerrtest, overflowtest
+        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '02/26/1984',
+            None, "Not a date at all.", valerrtest, overflowtest
         )
         self.assertManyResults(time.naturalday, test_list, result_list)
 
@@ -277,12 +275,11 @@ class TimeTestCase(HumanizeTestCase):
 
         if today.month != 3:
             someday = date(today.year, 3, 5)
-            someday_result = 'Mar 05'
+            someday_result = '05 de março'
         else:
             someday = date(today.year, 9, 5)
-            someday_result = 'Sep 05'
+            someday_result = '05 de setembro'
 
         test_list = (today, tomorrow, yesterday, someday, date(1982, 6, 27))
-        result_list = ('today', 'tomorrow', 'yesterday', someday_result, 'Jun 27 1982')
+        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '27 de junho de 1982')
         self.assertManyResults(time.naturaldate, test_list, result_list)
-

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Time humanizing functions.  These are largely borrowed from Django's
+"""Time humanizing functions. These are largely borrowed from Django's
 ``contrib.humanize``."""
 
 import time
@@ -9,21 +9,19 @@ from datetime import datetime, timedelta, date
 
 __all__ = ['naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
 
-# TODO voltar para ingles e corrigir aquivos de locale
-# TODO 2 descobrir qual setembro eh o certo do datetime
 MONTHS = {"Jan": "janeiro",
-          "Feb": "fevereiro",
-          "Mar": "março",
-          "Apr": "abril",
-          "May": "maio",
-          "Jun": "junho",
-          "Jul": "julho",
-          "Aug": "agosto",
-          "Sep": "setembro",
-          "Sept": "setembro",
-          "Oct": "outubro",
-          "Nov": "novembro",
-          "Dec": "dezembro"}
+    "Feb": "fevereiro",
+    "Mar": "março",
+    "Apr": "abril",
+    "May": "maio",
+    "Jun": "junho",
+    "Jul": "julho",
+    "Aug": "agosto",
+    "Sep": "setembro",
+    "Sept": "setembro",
+    "Oct": "outubro",
+    "Nov": "novembro",
+    "Dec": "dezembro"}
 
 def _now():
     return datetime.now()
@@ -38,7 +36,7 @@ def abs_timedelta(delta):
 
 def date_and_delta(value):
     """Turn a value into a date and a timedelta which represents how long ago
-    it was.  If that's not possible, return (None, value)."""
+    it was. If that's not possible, return (None, value)."""
     now = _now()
     if isinstance(value, datetime):
         date = value
@@ -57,8 +55,8 @@ def date_and_delta(value):
 
 def naturaldelta(value, months=True):
     """Given a timedelta or a number of seconds, return a natural
-    representation of the amount of time elapsed.  This is similar to
-    ``naturaltime``, but does not add tense to the result.  If ``months``
+    representation of the amount of time elapsed. This is similar to
+    ``naturaltime``, but does not add tense to the result. If ``months``
     is True, then a number of months (based on 30.5 days) will be used
     for fuzziness between years."""
     now = _now()
@@ -107,7 +105,7 @@ def naturaldelta(value, months=True):
         if not months and not days:
             return "um ano"
         elif not months:
-            return "1 ano, %d dias" % days
+            return "1 ano e %d dias" % days
         elif use_months:
             if months == 1:
                 return "1 ano e 1 mês"
@@ -121,8 +119,8 @@ def naturaldelta(value, months=True):
 
 def naturaltime(value, future=False, months=True):
     """Given a datetime or a number of seconds, return a natural representation
-    of that time in a resolution that makes sense.  This is more or less
-    compatible with Django's ``naturaltime`` filter.  ``future`` is ignored for
+    of that time in a resolution that makes sense. This is more or less
+    compatible with Django's ``naturaltime`` filter. ``future`` is ignored for
     datetimes, where the tense is always figured out based on the current time.
     If an integer is passed, the return value will be past tense by default,
     unless ``future`` is set to True."""
@@ -162,7 +160,10 @@ def naturalday(value, hasYear=False):
     elif delta.days == -1:
         return 'ontem'
     month = MONTHS[value.strftime('%b')]
-    return value.strftime('em %d ' + 'de' + ' ' + month + ' ' + 'de' + ' %Y')
+    natday = '{0} de {1}'.format(value.strftime('%d'), month)
+    if hasYear:
+        natday += ' de {0}'.format(value.strftime('%Y'), )
+    return natday
 
 def naturalyear(value):
     """For date values that are last year, this year or next year compared to
@@ -200,5 +201,3 @@ def naturaldate(value):
     if delta.days >= 365:
         return naturalday(value, True)
     return naturalday(value)
-
-
