@@ -119,7 +119,7 @@ class TimeTestCase(HumanizeTestCase):
             'a year',
             "NaN",
         ]
-        with patch('humanize.time._now') as mocked:
+        with patch('humanizer-portugues.time._now') as mocked:
             mocked.return_value = now
             self.assertManyResults(time.naturaldelta, test_list, result_list)
 
@@ -180,7 +180,7 @@ class TimeTestCase(HumanizeTestCase):
             '1 year, 4 days ago',
             "NaN",
         ]
-        with patch('humanize.time._now') as mocked:
+        with patch('humanizer-portugues.time._now') as mocked:
             mocked.return_value = now
             self.assertManyResults(time.naturaltime, test_list, result_list)
 
@@ -245,7 +245,7 @@ class TimeTestCase(HumanizeTestCase):
             '1 year, 4 days ago',
             "NaN",
         ]
-        with patch('humanize.time._now') as mocked:
+        with patch('humanizer-portugues.time._now') as mocked:
             mocked.return_value = now
             nt_nomonths = lambda d: time.naturaltime(d, months=False)
             self.assertManyResults(nt_nomonths, test_list, result_list)
