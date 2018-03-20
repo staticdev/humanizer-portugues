@@ -3,7 +3,6 @@
 
 from setuptools import setup, find_packages
 import sys, os
-import io
 
 import humanizer_portugues
 
