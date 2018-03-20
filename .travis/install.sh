@@ -3,7 +3,7 @@
 set -e
 set -x
 
-pip install codecov
+pip3 install codecov
 
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     if [ ! -e "$HOME/.pyenv-humanizer-portugues/.git" ]; then
