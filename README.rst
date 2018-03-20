@@ -110,7 +110,7 @@ Humanization de números de ponto flutuante:
     '3/10'
     
     humanizer_portugues.fractional(0.333)
-    '1/3'
+    '333/1000'
     
     humanizer_portugues.fractional(1)
     '1'

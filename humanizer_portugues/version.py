@@ -9,5 +9,5 @@ def _make_version(major, minor, patch, releaselevel, serial):
     return version
 
 # Same semantics as sys.version_info.
-version_info = (0, 2, 0, 'final', 0)
+version_info = (1, 0, 0, 'final', 0)
 __version__ = _make_version(*version_info)
