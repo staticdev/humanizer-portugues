@@ -119,6 +119,9 @@ Humanization de listas:
 
 .. code-block:: python
 
+    humanizer_portugues.list_to_phrase(['Cláudio', 'Maria'], ',')
+    'Cláudio, Maria'
+
     humanizer_portugues.list_to_phrase(['Cláudio', 'Maria'], ',', 'e')
     'Cláudio e Maria'
 

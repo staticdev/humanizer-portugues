@@ -5,12 +5,13 @@
 
 from unittest.mock import patch
 
-from humanizer_portugues import time
+from humanizer_portugues.time import date_and_delta, naturaldate, naturalday, naturaldelta, naturaltime, naturalyear
 from datetime import date, datetime, timedelta
 from .base import HumanizeTestCase
 
 today = date.today()
 one_day = timedelta(days=1)
+one_year = timedelta(days=365)
 
 class fakedate(object):
     def __init__(self, year, month, day):
@@ -27,10 +28,10 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
         results = [(now - td(seconds=x), td(seconds=x)) for x in int_tests]
         for t in (int_tests, date_tests, td_tests):
             for arg, result in zip(t, results):
-                dt, d = time.date_and_delta(arg)
+                dt, d = date_and_delta(arg)
                 self.assertEqualDatetime(dt, result[0])
                 self.assertEqualTimedelta(d, result[1])
-        self.assertEqual(time.date_and_delta("NaN"), (None, "NaN"))
+        self.assertEqual(date_and_delta("NaN"), (None, "NaN"))
 
 class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time"""
@@ -51,7 +52,7 @@ class TimeTestCase(HumanizeTestCase):
         ]
         with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
-            nd_nomeses = lambda d: time.naturaldelta(d, months=False)
+            nd_nomeses = lambda d: naturaldelta(d, months=False)
             self.assertManyResults(nd_nomeses, test_list, result_list)
 
     def test_naturaldelta(self):
@@ -121,7 +122,7 @@ class TimeTestCase(HumanizeTestCase):
         ]
         with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
-            self.assertManyResults(time.naturaldelta, test_list, result_list)
+            self.assertManyResults(naturaldelta, test_list, result_list)
 
     def test_naturaltime(self):
         now = datetime.now()
@@ -182,7 +183,7 @@ class TimeTestCase(HumanizeTestCase):
         ]
         with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
-            self.assertManyResults(time.naturaltime, test_list, result_list)
+            self.assertManyResults(naturaltime, test_list, result_list)
 
     def test_naturaltime_nomonths(self):
         now = datetime.now()
@@ -247,7 +248,7 @@ class TimeTestCase(HumanizeTestCase):
         ]
         with patch('humanizer_portugues.time._now') as mocked:
             mocked.return_value = now
-            nt_nomonths = lambda d: time.naturaltime(d, months=False)
+            nt_nomonths = lambda d: naturaltime(d, months=False)
             self.assertManyResults(nt_nomonths, test_list, result_list)
 
     def test_naturalday(self):
@@ -267,7 +268,7 @@ class TimeTestCase(HumanizeTestCase):
         result_list = ('hoje', 'amanhã', 'ontem', someday_result, '02/26/1984',
             None, "Not a date at all.", valerrtest, overflowtest
         )
-        self.assertManyResults(time.naturalday, test_list, result_list)
+        self.assertManyResults(naturalday, test_list, result_list)
 
     def test_naturaldate(self):
         tomorrow = today + one_day
@@ -279,7 +280,28 @@ class TimeTestCase(HumanizeTestCase):
         else:
             someday = date(today.year, 9, 5)
             someday_result = '05 de setembro'
+        valerrtest = fakedate(290149024, 2, 2)
+        overflowtest = fakedate(120390192341, 2, 2)
 
-        test_list = (today, tomorrow, yesterday, someday, date(1982, 6, 27))
-        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '27 de junho de 1982')
-        self.assertManyResults(time.naturaldate, test_list, result_list)
+        test_list = (today, tomorrow, yesterday, someday, date(1982, 6, 27), 
+            None, "Not a date at all.", valerrtest, overflowtest
+        )
+        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '27 de junho de 1982',
+            None, "Not a date at all.", valerrtest, overflowtest
+        )
+        self.assertManyResults(naturaldate, test_list, result_list)
+
+    def test_naturalyear(self):
+        next_year = today + one_year
+        last_year = today - one_year
+
+        someyear = fakedate(1988, 1, 1)
+        valerrtest = fakedate(290149024, 2, 2)
+        overflowtest = fakedate(120390192341, 2, 2)
+        test_list = (today, next_year, last_year, '1955', someyear,
+            None, "Not a date at all.", valerrtest, overflowtest
+        )
+        result_list = ('este ano', 'ano que vem', 'ano passado', '1955', '1988',
+            None, "Not a date at all.", valerrtest, overflowtest
+        )
+        self.assertManyResults(naturalyear, test_list, result_list)

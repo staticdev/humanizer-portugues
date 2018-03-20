@@ -5,7 +5,6 @@
 
 import re
 from fractions import Fraction
-from .import compat
 
 def ordinal(value):
     """Converts an integer to its ordinal as a string. 1 is '1º', 2 is '2º',
@@ -24,7 +23,7 @@ def intcomma(value):
     some compatability with Django's intcomma, this function also accepts
     floats."""
     try:
-        if isinstance(value, compat.string_types):
+        if isinstance(value, str):
             float(value.replace(',', ''))
         else:
             float(value)

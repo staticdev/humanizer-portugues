@@ -9,7 +9,6 @@ suffixes = {
     'gnu': "KMGTPEZY",
 }
 
-
 def naturalsize(value, binary=False, gnu=False, format='%.1f'):
     """Format a number of byteslike a human readable filesize (eg. 10 kB).  By
     default, decimal suffixes (kB, MB) are used.  Passing binary=true will use

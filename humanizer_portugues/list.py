@@ -5,13 +5,19 @@ __all__ = ['list_to_phrase']
 
 SPACE = ' '
 
-def list_to_phrase(itens, separator, conjunction):
+def list_to_phrase(itens, separator, conjunction=None):
     len_itens = len(itens)
-    if len(itens) == 1:
+    if len_itens == 0:
+        return ''
+    elif len_itens == 1:
         return itens[0]
     else:
         phrase = itens[0]
-        for n in range(1, len_itens - 1):
-             phrase += separator + SPACE + itens[n]
-        phrase += SPACE + conjunction + SPACE + itens[len_itens - 1]
+        if conjunction:
+            for n in range(1, len_itens - 1):
+                phrase += separator + SPACE + itens[n]
+            phrase += SPACE + conjunction + SPACE + itens[len_itens - 1]
+        else:
+            for n in range(1, len_itens):
+                phrase += separator + SPACE + itens[n]
         return phrase

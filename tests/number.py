@@ -3,7 +3,7 @@
 
 """Number tests."""
 
-from humanizer_portugues import number
+from humanizer_portugues.number import apnumber, fractional, human_powers, intcomma, intword, ordinal, powers
 from .base import HumanizeTestCase
 
 class NumberTestCase(HumanizeTestCase):
@@ -13,7 +13,7 @@ class NumberTestCase(HumanizeTestCase):
             '111', 'something else', None)
         result_list = ('1º', '2º', '3º', '4º', '11º', '12º', '13º',
             '101º', '102º', '103º', '111º', 'something else', None)
-        self.assertManyResults(number.ordinal, test_list, result_list)
+        self.assertManyResults(ordinal, test_list, result_list)
 
     def test_intcomma(self):
         test_list = (100, 1000, 10123, 10311, 1000000, 1234567.25, '100',
@@ -21,11 +21,11 @@ class NumberTestCase(HumanizeTestCase):
         result_list = ('100', '1,000', '10,123', '10,311', '1,000,000',
             '1,234,567.25', '100', '1,000', '10,123', '10,311', '1,000,000',
             '1,234,567.1234567', None)
-        self.assertManyResults(number.intcomma, test_list, result_list)
+        self.assertManyResults(intcomma, test_list, result_list)
 
     def test_intword(self):
         # make sure that powers & human_powers have the same number of items
-        self.assertEqual(len(number.powers), len(number.human_powers))
+        self.assertEqual(len(powers), len(human_powers))
         # test the result of intword
         test_list = ('100', '1000000', '1200000', '1290000', '1000000000',
             '2000000000', '6000000000000', '1300000000000000',
@@ -35,14 +35,14 @@ class NumberTestCase(HumanizeTestCase):
            '1.0 bilhão', '2.0 bilhão', '6.0 trilhão', '1.3 quatrilhão',
            '3.5 sextilhão', '8.1 decilhão', None, '1.23 milhão',
            '1'+'0'*101)
-        self.assertManyResults(number.intword, test_list, result_list)
+        self.assertManyResults(intword, test_list, result_list)
 
     def test_apnumber(self):
         test_list = (1, 2, 4, 5, 9, 10, '7', None)
         result_list = ('um', 'dois', 'quatro', 'cinco', 'nove', '10', 'sete', None)
-        self.assertManyResults(number.apnumber, test_list, result_list)
+        self.assertManyResults(apnumber, test_list, result_list)
 
     def test_fractional(self):
         test_list = (1, 2.0, (4.0/3.0), (5.0/6.0), '7', '8.9', 'dez', None)
         result_list = ('1', '2', '1 1/3', '5/6', '7', '8 9/10', 'dez', None)
-        self.assertManyResults(number.fractional, test_list, result_list)
+        self.assertManyResults(fractional, test_list, result_list)

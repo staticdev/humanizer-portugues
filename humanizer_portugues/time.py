@@ -184,7 +184,7 @@ def naturalyear(value):
         return 'ano que vem'
     elif delta == -1:
         return 'ano passado'
-    return value.strftime('em %Y')
+    return value.strftime('%Y')
 
 def naturaldate(value):
     """Like naturalday, but will append a year for dates that are a year

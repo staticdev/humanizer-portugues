@@ -3,7 +3,7 @@
 
 """Tests for filesize humanizing."""
 
-from humanizer_portugues import filesize
+from humanizer_portugues.filesize import naturalsize
 from .base import HumanizeTestCase
 
 class FilesizeTestCase(HumanizeTestCase):
@@ -18,5 +18,5 @@ class FilesizeTestCase(HumanizeTestCase):
             '300 Bytes', '2.9 KiB', '2.9 MiB', '300B', '2.9K', '2.9M', '1.0K', '2481.5Y',
             '2481.5 YiB', '3000.0 YB',
             '3.14 MB', '2.930K', '3G', '2481.542 YiB')
-        self.assertManyResults(filesize.naturalsize, tests, results)
+        self.assertManyResults(naturalsize, tests, results)
 
