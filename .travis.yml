@@ -1,3 +1,5 @@
+sudo: false
+
 language: python
 cache:
   directories:
@@ -7,28 +9,20 @@ matrix:
   include:
   - os: linux
     dist: trusty
-    sudo: false
     python: '3.4'
   - os: linux
     dist: trusty
-    sudo: false
     python: '3.5'
   - os: linux
     dist: trusty
-    sudo: false
     python: '3.6'
     env: BUILD_SDIST=true
   - os: linux
-    sudo: false
     python: pypy3
-  - os: osx
-    language: objective-c
-    env: PYENV_VERSION=3.5.2
 before_install:
-  - chmod +x .travis/install.sh
   - chmod +x .travis/run.sh
 install:
-  - "./.travis/install.sh"
+  - pip install codecov
 script:
   - "./.travis/run.sh"
 after_success:
