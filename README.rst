@@ -119,13 +119,13 @@ Humanization de listas:
 
 .. code-block:: python
 
-    humanizer_portugues.list_to_phrase(['Cláudio', 'Maria'], ',')
+    humanizer_portugues.naturallist(['Cláudio', 'Maria'], ',')
     'Cláudio, Maria'
 
-    humanizer_portugues.list_to_phrase(['Cláudio', 'Maria'], ',', 'e')
+    humanizer_portugues.naturallist(['Cláudio', 'Maria'], ',', 'e')
     'Cláudio e Maria'
 
-    humanizer_portugues.list_to_phrase(['Cláudio', 'Maria', 'José'], ';', 'ou')
+    humanizer_portugues.naturallist(['Cláudio', 'Maria', 'José'], ';', 'ou')
     'Cláudio; Maria ou José'
 
 .. _Humanize: https://github.com/jmoiron/humanize

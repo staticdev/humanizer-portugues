@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__all__ = ['list_to_phrase']
+__all__ = ['naturallist']
 
 SPACE = ' '
 
-def list_to_phrase(itens, separator, conjunction=None):
+def naturallist(itens, separator, conjunction=None):
     len_itens = len(itens)
     if len_itens == 0:
         return ''
