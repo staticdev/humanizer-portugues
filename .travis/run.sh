@@ -11,7 +11,7 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 fi
 REQUIRE_SPEEDUPS=1 python setup.py build_ext -i
 python -m compileall -f .
-python setup.py test
+coverage run -m unittest discover
 
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     python setup.py bdist_wheel

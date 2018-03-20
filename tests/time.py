@@ -3,7 +3,7 @@
 
 """Tests for time humanizing."""
 
-from mock import patch
+from unittest.mock import patch
 
 from humanizer_portugues import time
 from datetime import date, datetime, timedelta
