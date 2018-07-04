@@ -72,10 +72,10 @@ Humanization datas e horas:
     'ontem'
     
     humanizer_portugues.naturalday(datetime.date(2007, 6, 5))
-    '05 de junho'
+    'em 05 de junho'
     
     humanizer_portugues.naturaldate(datetime.date(2007, 6, 5))
-    '05 de junho de 2007'
+    'em 05 de junho de 2007'
     
     humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=1))
     'há um segundo'

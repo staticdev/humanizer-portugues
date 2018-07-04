@@ -256,10 +256,10 @@ class TimeTestCase(HumanizeTestCase):
         yesterday = today - one_day
         if today.month != 3:
             someday = date(today.year, 3, 5)
-            someday_result = '05 de março'
+            someday_result = 'em 05 de março'
         else:
             someday = date(today.year, 9, 5)
-            someday_result = '05 de setembro'
+            someday_result = 'em 05 de setembro'
         valerrtest = fakedate(290149024, 2, 2)
         overflowtest = fakedate(120390192341, 2, 2)
         test_list = (today, tomorrow, yesterday, someday, '02/26/1984',
@@ -276,17 +276,17 @@ class TimeTestCase(HumanizeTestCase):
 
         if today.month != 3:
             someday = date(today.year, 3, 5)
-            someday_result = '05 de março'
+            someday_result = 'em 05 de março'
         else:
             someday = date(today.year, 9, 5)
-            someday_result = '05 de setembro'
+            someday_result = 'em 05 de setembro'
         valerrtest = fakedate(290149024, 2, 2)
         overflowtest = fakedate(120390192341, 2, 2)
 
         test_list = (today, tomorrow, yesterday, someday, date(1982, 6, 27), 
             None, "Not a date at all.", valerrtest, overflowtest
         )
-        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '27 de junho de 1982',
+        result_list = ('hoje', 'amanhã', 'ontem', someday_result, 'em 27 de junho de 1982',
             None, "Not a date at all.", valerrtest, overflowtest
         )
         self.assertManyResults(naturaldate, test_list, result_list)
