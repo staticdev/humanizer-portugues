@@ -160,7 +160,7 @@ def naturalday(value, hasYear=False):
     elif delta.days == -1:
         return 'ontem'
     month = MONTHS[value.strftime('%b')]
-    natday = '{0} de {1}'.format(value.strftime('%d'), month)
+    natday = 'em {0} de {1}'.format(value.strftime('%d'), month)
     if hasYear:
         natday += ' de {0}'.format(value.strftime('%Y'), )
     return natday
