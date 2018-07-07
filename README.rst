@@ -62,10 +62,10 @@ Humanization datas e horas:
 .. code-block:: python
 
     import datetime
-    humanizer_portugues.naturalclock(datetime.time(13, 1, 0))
+    humanizer_portugues.naturalclock(datetime.time(0, 30, 0))
     'zero hora e trinta minutos'
 
-    humanizer_portugues.naturalclock(datetime.time(13, 1, 0), formal=False)
+    humanizer_portugues.naturalclock(datetime.time(0, 30, 0), formal=False)
     'meia noite e meia'
 
     humanizer_portugues.naturalday(datetime.datetime.now())
