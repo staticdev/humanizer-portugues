@@ -18,6 +18,9 @@ matrix:
     python: '3.6'
     env: BUILD_SDIST=true
   - os: linux
+    dist: trusty
+    python: '3.7'
+  - os: linux
     python: pypy3
 before_install:
   - chmod +x .travis/run.sh

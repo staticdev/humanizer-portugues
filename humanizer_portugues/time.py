@@ -5,9 +5,9 @@
 ``contrib.humanize``."""
 
 import time
-from datetime import datetime, timedelta, date
+from datetime import date, datetime, time, timedelta
 
-__all__ = ['naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
+__all__ = ['naturalclock', 'naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
 
 MONTHS = {"Jan": "janeiro",
     "Feb": "fevereiro",
@@ -21,10 +21,138 @@ MONTHS = {"Jan": "janeiro",
     "Sept": "setembro",
     "Oct": "outubro",
     "Nov": "novembro",
-    "Dec": "dezembro"}
+    "Dec": "dezembro"
+}
+
+HOURS = {0: "zero",
+    1: "uma",
+    2: "duas",
+    3: "três",
+    4: "quatro",
+    5: "cinco",
+    6: "seis",
+    7: "sete",
+    8: "oito",
+    9: "nove",
+    10: "dez",
+    11: "onze",
+    12: "doze"
+}
+
+MINUTES = {1: "um",
+    2: "dois",
+    3: "três",
+    4: "quatro",
+    5: "cinco",
+    6: "seis",
+    7: "sete",
+    8: "oito",
+    9: "nove",
+    10: "dez",
+    11: "onze",
+    12: "doze",
+    13: "treze",
+    14: "quatorze",
+    15: "quinze",
+    16: "dezesseis",
+    17: "dezessete",
+    18: "dezoito",
+    19: "dezenove",
+    20: "vinte",
+    21: "vinte e um",
+    22: "vinte e dois",
+    23: "vinte e três",
+    24: "vinte e quatro",
+    25: "vinte e cinco",
+    26: "vinte e seis",
+    27: "vinte e sete",
+    28: "vinte e oito",
+    29: "vinte e nove",
+    30: "trinta",
+    31: "trinta e um",
+    32: "trinta e dois",
+    33: "trinta e três",
+    34: "trinta e quatro",
+    35: "trinta e cinco",
+    36: "trinta e seis",
+    37: "trinta e sete",
+    38: "trinta e oito",
+    39: "trinta e nove",
+    40: "quarenta",
+    41: "quarenta e um",
+    42: "quarenta e dois",
+    43: "quarenta e três",
+    44: "quarenta e quatro",
+    45: "quarenta e cinco",
+    46: "quarenta e seis",
+    47: "quarenta e sete",
+    48: "quarenta e oito",
+    49: "quarenta e nove",
+    50: "cinquenta",
+    51: "cinquenta e um",
+    52: "cinquenta e dois",
+    53: "cinquenta e três",
+    54: "cinquenta e quatro",
+    55: "cinquenta e cinco",
+    56: "cinquenta e seis",
+    57: "cinquenta e sete",
+    58: "cinquenta e oito",
+    59: "cinquenta e nove"
+}
 
 def _now():
     return datetime.now()
+
+def naturalclock(value, formal=True):
+    try:
+        value = time(value.hour, value.minute, value.second)
+    except (AttributeError, OverflowError, ValueError):
+        # Passed value wasn't time-ish or time arguments out of range
+        return value
+    if value.minute in [40, 45, 50, 55]:
+        usedHour = value.hour + 1
+    else:
+        usedHour = value.hour
+    if usedHour > 0 and usedHour <= 11:
+        periodo = 'manhã'
+    elif usedHour > 12 and usedHour <= 18:
+        periodo = 'tarde'
+    elif usedHour > 18 and usedHour <= 23:
+        periodo = 'noite'
+
+    if usedHour > 12:
+        usedHour -= 12
+    clock = HOURS[usedHour]
+
+    # Formal time
+    if formal == True:
+        if usedHour in [0, 1]:
+            clock += ' hora'
+        else:
+            clock += ' horas'
+        if value.minute in [40, 45, 50, 55]:
+            clock = MINUTES[60 - value.minute] + ' minutos para ' + clock
+        elif value.minute == 1:
+            clock += ' e um minuto'
+        elif value.minute != 0:
+            clock += ' e ' + MINUTES[value.minute] + ' minutos'
+    # Informal time
+    else:
+        if usedHour == 0: 
+            clock = 'meia noite'
+        elif usedHour == 12:
+            clock = 'meio dia'
+        if value.minute in [40, 45, 50, 55]:
+            clock = MINUTES[60 - value.minute] + ' para ' + clock
+        elif value.minute == 30:
+            clock += ' e meia'
+        elif value.minute != 0:
+            clock += ' e ' + MINUTES[value.minute]
+        try:
+            periodo
+            clock += ' da ' + periodo
+        except: pass
+    return str(clock)
 
 def abs_timedelta(delta):
     """Returns an "absolute" value for a timedelta, always representing a
@@ -59,7 +187,6 @@ def naturaldelta(value, months=True):
     ``naturaltime``, but does not add tense to the result. If ``months``
     is True, then a number of months (based on 30.5 days) will be used
     for fuzziness between years."""
-    now = _now()
     date, delta = date_and_delta(value)
     if date is None:
         return value
@@ -146,11 +273,8 @@ def naturalday(value, hasYear=False):
     formatted according to ``format``."""
     try:
         value = date(value.year, value.month, value.day)
-    except AttributeError:
-        # Passed value wasn't date-ish
-        return value
-    except (OverflowError, ValueError):
-        # Date arguments out of range
+    except (AttributeError, OverflowError, ValueError):
+        # Passed value wasn't date-ish or date arguments out of range
         return value
     delta = value - date.today()
     if delta.days == 0:
@@ -171,11 +295,8 @@ def naturalyear(value):
     formatted according to the year."""
     try:
         value = date(value.year, value.month, value.day)
-    except AttributeError:
-        # Passed value wasn't date-ish
-        return value
-    except (OverflowError, ValueError):
-        # Date arguments out of range
+    except (AttributeError, OverflowError, ValueError):
+        # Passed value wasn't date-ish or date arguments out of range
         return value
     delta = value.year - date.today().year
     if delta == 0:
@@ -191,11 +312,8 @@ def naturaldate(value):
     ago or more."""
     try:
         value = date(value.year, value.month, value.day)
-    except AttributeError:
-        # Passed value wasn't date-ish
-        return value
-    except (OverflowError, ValueError):
-        # Date arguments out of range
+    except (AttributeError, OverflowError, ValueError):
+        # Passed value wasn't date-ish or date arguments out of range
         return value
     delta = abs_timedelta(value - date.today())
     if delta.days >= 365:

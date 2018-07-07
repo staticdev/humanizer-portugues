@@ -5,8 +5,8 @@
 
 from unittest.mock import patch
 
-from humanizer_portugues.time import date_and_delta, naturaldate, naturalday, naturaldelta, naturaltime, naturalyear
-from datetime import date, datetime, timedelta
+from humanizer_portugues.time import date_and_delta, naturalclock, naturaldate, naturalday, naturaldelta, naturaltime, naturalyear
+from datetime import date, datetime, time, timedelta
 from .base import HumanizeTestCase
 
 today = date.today()
@@ -16,6 +16,10 @@ one_year = timedelta(days=365)
 class fakedate(object):
     def __init__(self, year, month, day):
         self.year, self.month, self.day = year, month, day
+
+class faketime(object):
+    def __init__(self, hour, minute, second):
+        self.hour, self.minute, self.second = hour, minute, second
 
 class TimeUtilitiesTestCase(HumanizeTestCase):
     """These are not considered "public" interfaces, but require tests anyway."""
@@ -35,6 +39,28 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
 
 class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time"""
+    def test_naturalclock_formal(self):
+        meia_noite_meia = time(0, 30, 0)
+        treze_um = time(13, 1, 0)
+        dez_p_cinco = time(4, 50, 10)
+        cinco_p_meiodia = time(11, 55, 0)
+        vinteuma = time(21, 0, 40)
+        overflowtest = faketime(120390192341, 2, 2)
+        test_list = ('Not a time at all.', meia_noite_meia, treze_um, dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
+        result_list = ('Not a time at all.', 'zero hora e trinta minutos', 'uma hora e um minuto', 'dez minutos para cinco horas', 'cinco minutos para doze horas', 'nove horas', overflowtest)
+        self.assertManyResults(naturalclock, test_list, result_list)
+
+    def test_naturalclock_informal(self):
+        meia_noite_meia = time(0, 30, 0)
+        treze_um = time(13, 1, 0)
+        dez_p_cinco = time(4, 50, 10)
+        cinco_p_meiodia = time(11, 55, 0)
+        vinteuma = time(21, 0, 40)
+        overflowtest = faketime(120390192341, 2, 2)
+        test_list = ('Not a time at all.', meia_noite_meia, treze_um, dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
+        result_list = ('Not a time at all.', 'meia noite e meia', 'uma e um da tarde', 'dez para cinco da manhã', 'cinco para meio dia', 'nove da noite', overflowtest)
+        nc_informal = lambda d: naturalclock(d, formal=False)
+        self.assertManyResults(nc_informal, test_list, result_list)
 
     def test_naturaldelta_nomeses(self):
         now = datetime.now()
