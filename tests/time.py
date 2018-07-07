@@ -47,7 +47,7 @@ class TimeTestCase(HumanizeTestCase):
         vinteuma = time(21, 0, 40)
         overflowtest = faketime(120390192341, 2, 2)
         test_list = ('Not a time at all.', meia_noite_meia, treze_um, dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
-        result_list = ('Not a time at all.', 'zero hora e trinta minutos', 'uma hora e um minuto', 'dez minutos para cinco horas', 'cinco minutos para doze horas', 'nove horas', overflowtest)
+        result_list = ('Not a time at all.', 'zero hora e trinta minutos', 'treze horas e um minuto', 'dez minutos para cinco horas', 'cinco minutos para doze horas', 'vinte e uma horas', overflowtest)
         self.assertManyResults(naturalclock, test_list, result_list)
 
     def test_naturalclock_informal(self):

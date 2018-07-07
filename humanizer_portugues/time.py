@@ -36,10 +36,22 @@ HOURS = {0: "zero",
     9: "nove",
     10: "dez",
     11: "onze",
-    12: "doze"
+    12: "doze",
+    13: "treze",
+    14: "quatorze",
+    15: "quinze",
+    16: "dezesseis",
+    17: "dezessete",
+    18: "dezoito",
+    19: "dezenove",
+    20: "vinte",
+    21: "vinte e uma",
+    22: "vinte e duas",
+    23: "vinte e três"
 }
 
-MINUTES = {1: "um",
+MINUTES = {
+    1: "um",
     2: "dois",
     3: "três",
     4: "quatro",
@@ -119,13 +131,9 @@ def naturalclock(value, formal=True):
         periodo = 'tarde'
     elif usedHour > 18 and usedHour <= 23:
         periodo = 'noite'
-
-    if usedHour > 12:
-        usedHour -= 12
-    clock = HOURS[usedHour]
-
     # Formal time
     if formal == True:
+        clock = HOURS[usedHour]
         if usedHour in [0, 1]:
             clock += ' hora'
         else:
@@ -138,6 +146,10 @@ def naturalclock(value, formal=True):
             clock += ' e ' + MINUTES[value.minute] + ' minutos'
     # Informal time
     else:
+        if usedHour > 12:
+            usedHour -= 12
+        clock = HOURS[usedHour]
+
         if usedHour == 0: 
             clock = 'meia noite'
         elif usedHour == 12:
