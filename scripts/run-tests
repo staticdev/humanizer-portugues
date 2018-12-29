@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# Don't run tests from the root repo dir.
+# We want to ensure we're importing from the installed
+# binary package not from the CWD.
+
+from os import chdir, path
+from subprocess import check_call
+
+_dname = path.dirname
+
+REPO_ROOT = _dname(_dname(_dname(path.abspath(__file__))))
+chdir(path.join(REPO_ROOT, 'tests'))
+
+def run(command):
+    return check_call(command, shell=True)
+
+run('coverage run --omit="*/tests/*" -m unittest discover')

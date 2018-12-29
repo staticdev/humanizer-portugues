@@ -9,5 +9,5 @@ def _make_version(major, minor, patch, releaselevel, serial):
     return version
 
 # Same semantics as semver.org
-version_info = (1, 2, 0, 'alpha', 3)
+version_info = (1, 2, 0, 'beta', 0)
 __version__ = _make_version(*version_info)
