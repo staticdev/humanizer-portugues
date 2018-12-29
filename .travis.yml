@@ -16,13 +16,13 @@ matrix:
 
 cache: pip
 before_install:
-  - pip install codecov
+  - chmod +x scripts/run.sh
 
 install:
-  - python scripts/install  
+  - pip install codecov
 
 script:
-   - python scripts/run-tests
+   - "./.travis/run.sh"
 
 after_success:
   - rm tests/coverage.xml && mv tests/.coverage ./ && codecov
