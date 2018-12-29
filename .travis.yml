@@ -1,5 +1,4 @@
 language: python
-
 matrix:
   include:
   - python: '3.5'
@@ -14,7 +13,6 @@ matrix:
   - python: pypy3
   allow_failures:
     - python: pypy3
-  fast_finish: true
 
 cache: pip
 before_install:
