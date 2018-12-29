@@ -22,7 +22,7 @@ run('pip install coverage')
 if os.path.isdir('dist') and os.listdir('dist'):
     shutil.rmtree('dist')
 
-REQUIRE_SPEEDUPS=1 python setup.py build_ext -i
+run('REQUIRE_SPEEDUPS=1 python setup.py build_ext -i')
 run('python -m compileall -f .')
 run('coverage run --omit="*/tests/*" -m unittest discover')
 run('python setup.py sdist')
