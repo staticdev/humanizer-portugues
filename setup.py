@@ -1,17 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import codecs
+import os.path
+import re
+import sys
 
 from setuptools import setup, find_packages
-import sys, os
 
-import humanizer_portugues
+here = os.path.abspath(os.path.dirname(__file__))
+
+def read(*parts):
+    return codecs.open(os.path.join(here, *parts), 'r').read()
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
 
 with open('README.md', 'rb') as readme:
     readme_text = readme.read().decode('utf-8')
 
 setup(
     name='humanizer-portugues',
-    version=humanizer_portugues.__version__,
+    version=find_version("humanizer_portugues", "__init__.py"),
     description="Funções para humanização (humanize) para python ",
     long_description=readme_text,
     classifiers=[

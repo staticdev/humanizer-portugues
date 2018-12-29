@@ -1,22 +1,22 @@
-os: linux
-sudo: false
 language: python
-
-cache:
-  directories:
-  - "$HOME/.cache/pip"
-  - "$HOME/.pyenv"
 
 matrix:
   include:
   - python: '3.5'
+    dist: xenial
+    sudo: false
   - python: '3.6'
+    dist: xenial
+    sudo: false
   - python: '3.7'
+    dist: xenial
+    sudo: true
   - python: pypy3
   allow_failures:
     - python: pypy3
   fast_finish: true
 
+cache: pip
 before_install:
   - pip install codecov
 
