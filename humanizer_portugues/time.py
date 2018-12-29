@@ -9,19 +9,18 @@ from datetime import date, datetime, time, timedelta
 
 __all__ = ['naturalclock', 'naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
 
-MONTHS = {"Jan": "janeiro",
-    "Feb": "fevereiro",
-    "Mar": "março",
-    "Apr": "abril",
-    "May": "maio",
-    "Jun": "junho",
-    "Jul": "julho",
-    "Aug": "agosto",
-    "Sep": "setembro",
-    "Sept": "setembro",
-    "Oct": "outubro",
-    "Nov": "novembro",
-    "Dec": "dezembro"
+MONTHS = {1: "janeiro",
+    2: "fevereiro",
+    3: "março",
+    4: "abril",
+    5: "maio",
+    6: "junho",
+    7: "julho",
+    8: "agosto",
+    9: "setembro",
+    10: "outubro",
+    11: "novembro",
+    12: "dezembro"
 }
 
 HOURS = {0: "zero",
@@ -295,10 +294,10 @@ def naturalday(value, hasYear=False):
         return 'amanhã'
     elif delta.days == -1:
         return 'ontem'
-    month = MONTHS[value.strftime('%b')]
-    natday = 'em {0} de {1}'.format(value.strftime('%d'), month)
+    month = MONTHS[value.month]
+    natday = '{0} de {1}'.format(value.day, month)
     if hasYear:
-        natday += ' de {0}'.format(value.strftime('%Y'), )
+        natday += ' de {0}'.format(value.year)
     return natday
 
 def naturalyear(value):
@@ -317,7 +316,7 @@ def naturalyear(value):
         return 'ano que vem'
     elif delta == -1:
         return 'ano passado'
-    return value.strftime('%Y')
+    return value.year
 
 def naturaldate(value):
     """Like naturalday, but will append a year for dates that are a year
