@@ -22,7 +22,7 @@ install:
   - pip install codecov
 
 script:
-   - "./.travis/run.sh"
+   - "./scripts/run.sh"
 
 after_success:
   - rm tests/coverage.xml && mv tests/.coverage ./ && codecov
