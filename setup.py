@@ -6,7 +6,7 @@ import sys, os
 
 import humanizer_portugues
 
-with open('README.rst', 'rb') as readme:
+with open('README.md', 'rb') as readme:
     readme_text = readme.read().decode('utf-8')
 
 setup(
@@ -18,10 +18,9 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-#        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.7',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
     ],
