@@ -6,6 +6,7 @@ matrix:
     sudo: false
   - python: '3.6'
     dist: xenial
+    env: BUILD_SDIST=true
     sudo: false
   - python: '3.7'
     dist: xenial
