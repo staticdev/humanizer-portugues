@@ -21,6 +21,11 @@ except KeyError:
 run('pip install coverage')
 if os.path.isdir('dist') and os.listdir('dist'):
     shutil.rmtree('dist')
-#run('python setup.py bdist_wheel')
+
+REQUIRE_SPEEDUPS=1 python setup.py build_ext -i
+run('python -m compileall -f .')
+run('coverage run --omit="*/tests/*" -m unittest discover')
+run('python setup.py sdist')
+
 #wheel_dist = os.listdir('dist')[0]
 #run('pip install %s' % (os.path.join('dist', wheel_dist)))
