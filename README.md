@@ -1,7 +1,6 @@
 humanizer-portugues
 ===================
 
-![pyversions](https://img.shields.io/pypi/pyversions/humanizer-portugues.svg%0A%20:target:%20https://pypi.python.org/pypi/humanizer-portugues%0A%20:alt:%20Python%20versions%20supported)
 ![Travis](https://api.travis-ci.org/staticdev/humanizer-portugues.svg?branch=master)
 ![Codecov](https://codecov.io/github/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)
 ![PyPi](https://badge.fury.io/py/humanizer-portugues.svg)
