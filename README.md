@@ -7,7 +7,7 @@ humanizer-portugues
 
 Este pacote contém várias funções de humanização (humanization), como
 transformar um número em uma duração legível para humanos ('três minutos
-atrás') ou em uma frase. Ele funciona em python2 e 3, sendo recomendado
+atrás') ou em uma frase. Ele funciona em python3, sendo recomendado
 o uso da versão mais recente.
 
 Este código é baseado no pacote original
