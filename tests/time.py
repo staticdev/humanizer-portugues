@@ -68,12 +68,14 @@ class TimeTestCase(HumanizeTestCase):
             timedelta(days=7),
             timedelta(days=31),
             timedelta(days=230),
+            timedelta(days=366),
             timedelta(days=400),
         ]
         result_list = [
             '7 dias',
             '31 dias',
             '230 dias',
+            '1 ano e 1 dia',
             '1 ano e 35 dias',
         ]
         with patch('humanizer_portugues.time._now') as mocked:
@@ -108,6 +110,7 @@ class TimeTestCase(HumanizeTestCase):
             timedelta(days=365+35),
             30,
             timedelta(days=365*2 + 65),
+            timedelta(days=365 + 1),
             timedelta(days=365 + 4),
             timedelta(days=35),
             timedelta(days=65),
@@ -139,6 +142,7 @@ class TimeTestCase(HumanizeTestCase):
             '1 ano e 1 mês',
             '30 segundos',
             '2 anos',
+            '1 ano e 1 dia',
             '1 ano e 4 dias',
             'um mês',
             '2 meses',
