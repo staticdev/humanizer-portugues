@@ -7,9 +7,11 @@
 import time
 from datetime import date, datetime, time, timedelta
 
-__all__ = ['naturalclock', 'naturaldelta', 'naturaltime', 'naturalday', 'naturaldate', 'naturalyear']
+__all__ = ['naturalclock', 'naturaldelta', 'naturaltime',
+           'naturalday', 'naturaldate', 'naturalyear']
 
-MONTHS = {1: "janeiro",
+MONTHS = {
+    1: "janeiro",
     2: "fevereiro",
     3: "março",
     4: "abril",
@@ -23,7 +25,8 @@ MONTHS = {1: "janeiro",
     12: "dezembro"
 }
 
-HOURS = {0: "zero",
+HOURS = {
+    0: "zero",
     1: "uma",
     2: "duas",
     3: "três",
@@ -111,8 +114,10 @@ MINUTES = {
     59: "cinquenta e nove"
 }
 
+
 def _now():
     return datetime.now()
+
 
 def naturalclock(value, formal=True):
     try:
@@ -131,7 +136,7 @@ def naturalclock(value, formal=True):
     elif usedHour > 18 and usedHour <= 23:
         periodo = 'noite'
     # Formal time
-    if formal == True:
+    if formal:
         clock = HOURS[usedHour]
         if usedHour in [0, 1]:
             clock += ' hora'
@@ -149,7 +154,7 @@ def naturalclock(value, formal=True):
             usedHour -= 12
         clock = HOURS[usedHour]
 
-        if usedHour == 0: 
+        if usedHour == 0:
             clock = 'meia noite'
         elif usedHour == 12:
             clock = 'meio dia'
@@ -162,8 +167,10 @@ def naturalclock(value, formal=True):
         try:
             periodo
             clock += ' da ' + periodo
-        except: pass
+        except:
+            pass
     return str(clock)
+
 
 def abs_timedelta(delta):
     """Returns an "absolute" value for a timedelta, always representing a
@@ -172,6 +179,7 @@ def abs_timedelta(delta):
         now = _now()
         return now - (now + delta)
     return delta
+
 
 def date_and_delta(value):
     """Turn a value into a date and a timedelta which represents how long ago
@@ -191,6 +199,7 @@ def date_and_delta(value):
         except (ValueError, TypeError):
             return (None, value)
     return date, abs_timedelta(delta)
+
 
 def naturaldelta(value, months=True):
     """Given a timedelta or a number of seconds, return a natural
@@ -243,7 +252,10 @@ def naturaldelta(value, months=True):
         if not months and not days:
             return "um ano"
         elif not months:
-            return "1 ano e %d dias" % days
+            if days == 1:
+                return "1 ano e 1 dia"
+            else:
+                return "1 ano e %d dias" % days
         elif use_months:
             if months == 1:
                 return "1 ano e 1 mês"
@@ -278,6 +290,7 @@ def naturaltime(value, future=False, months=True):
 
     return ago % delta
 
+
 def naturalday(value, hasYear=False):
     """For date values that are tomorrow, today or yesterday compared to
     present day returns representing string. Otherwise, returns a string
@@ -300,6 +313,7 @@ def naturalday(value, hasYear=False):
         natday += ' de {0}'.format(value.year)
     return natday
 
+
 def naturalyear(value):
     """For date values that are last year, this year or next year compared to
     present year returns representing string. Otherwise, returns a string
@@ -317,6 +331,7 @@ def naturalyear(value):
     elif delta == -1:
         return 'ano passado'
     return str(value.year)
+
 
 def naturaldate(value):
     """Like naturalday, but will append a year for dates that are a year
