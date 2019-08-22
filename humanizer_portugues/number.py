@@ -6,6 +6,7 @@
 import re
 from fractions import Fraction
 
+
 def ordinal(value):
     """Converts an integer to its ordinal as a string. 1 is '1º', 2 is '2º',
     3 is '3º', etc. Works for any integer or anything int() will turn into an
@@ -33,33 +34,34 @@ def intcomma(value):
     new = re.sub("^(-?\d+)(\d{3})", '\g<1>,\g<2>', orig)
     if orig == new:
         return new
-    else:
-        return intcomma(new)
+    return intcomma(new)
 
-powers = [10 ** x for x in (6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 100)]
-human_powers = ('milhão', 'bilhão', 'trilhão', 'quatrilhão',
+POWERS = [10 ** x for x in (6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 100)]
+HUMAN_POWERS = ('milhão', 'bilhão', 'trilhão', 'quatrilhão',
                 'quintilhão', 'sextilhão', 'septilhão',
                 'octilhão', 'nonilhão', 'decilhão', 'googol')
 
 
-def intword(value, format='%.1f'):
+def intword(value, formatting='%.1f'):
     """Converts a large integer to a friendly text representation. Works best for
     numbers over 1 million. For example, 1000000 becomes '1.0 million', 1200000
-    becomes '1.2 million' and '1200000000' becomes '1.2 billion'.  Supports up to
-    decillion (33 digits) and googol (100 digits).  You can pass format to change
-    the number of decimal or general format of the number portion.  This function
-    returns a string unless the value passed was unable to be coaxed into an int."""
+    becomes '1.2 million' and '1200000000' becomes '1.2 billion'.  Supports up
+    to decillion (33 digits) and googol (100 digits).  You can pass format to
+    change the number of decimal or general format of the number portion.
+    This function returns a string unless the value passed was unable to be
+    coaxed into an int."""
     try:
         value = int(value)
     except (TypeError, ValueError):
         return value
 
-    if value < powers[0]:
+    if value < POWERS[0]:
         return str(value)
-    for ordinal, power in enumerate(powers[1:], 1):
+    for ordin, power in enumerate(POWERS[1:], 1):
         if value < power:
-            chopped = value / float(powers[ordinal - 1])
-            return (' '.join([format, human_powers[ordinal - 1]])) % chopped
+            chopped = value / float(POWERS[ordin - 1])
+            return (' '.join(
+                [formatting, HUMAN_POWERS[ordin - 1]])) % chopped
     return str(value)
 
 
@@ -78,7 +80,7 @@ def apnumber(value):
 
 
 def fractional(value):
-    '''
+    """
     There will be some cases where one might not want to show
         ugly decimal places for floats and decimals.
     This function returns a human readable fractional number
@@ -93,18 +95,19 @@ def fractional(value):
         fractional(float(1/3)) will return '1/3'
         fractional(1) will return '1'
     This will always return a string.
-    '''
+    """
     try:
         number = float(value)
     except (TypeError, ValueError):
         return value
-    wholeNumber = int(number)
-    frac = Fraction(number - wholeNumber).limit_denominator(1000)
-    numerator = frac._numerator
-    denominator = frac._denominator
-    if wholeNumber and not numerator and denominator == 1:
-        return '%.0f' % wholeNumber  # this means that an integer was passed in (or variants of that integer like 1.0000)
-    elif not wholeNumber:
+    whole_number = int(number)
+    frac = Fraction(number - whole_number).limit_denominator(1000)
+    numerator = frac.numerator
+    denominator = frac.denominator
+    if whole_number and not numerator and denominator == 1:
+        # this means that an integer was passed in
+        # or variants of that integer like 1.0000
+        return '%.0f' % whole_number
+    if not whole_number:
         return '%.0f/%.0f' % (numerator, denominator)
-    else:
-        return '%.0f %.0f/%.0f' % (wholeNumber, numerator, denominator)
+    return '%.0f %.0f/%.0f' % (whole_number, numerator, denominator)

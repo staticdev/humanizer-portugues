@@ -4,8 +4,7 @@
 """Time humanizing functions. These are largely borrowed from Django's
 ``contrib.humanize``."""
 
-import time
-from datetime import date, datetime, time, timedelta
+import datetime
 
 __all__ = ['naturalclock', 'naturaldelta', 'naturaltime',
            'naturalday', 'naturaldate', 'naturalyear']
@@ -116,29 +115,31 @@ MINUTES = {
 
 
 def _now():
-    return datetime.now()
+    return datetime.datetime.now()
 
 
 def naturalclock(value, formal=True):
+    """Compares time values to present time
+    returns representing readable of time with the given day period."""
     try:
-        value = time(value.hour, value.minute, value.second)
+        value = datetime.time(value.hour, value.minute, value.second)
     except (AttributeError, OverflowError, ValueError):
         # Passed value wasn't time-ish or time arguments out of range
         return value
     if value.minute in [40, 45, 50, 55]:
-        usedHour = value.hour + 1
+        used_hour = value.hour + 1
     else:
-        usedHour = value.hour
-    if usedHour > 0 and usedHour <= 11:
-        periodo = 'manhã'
-    elif usedHour > 12 and usedHour <= 18:
-        periodo = 'tarde'
-    elif usedHour > 18 and usedHour <= 23:
-        periodo = 'noite'
+        used_hour = value.hour
+    if 0 < used_hour <= 11:
+        period = 'manhã'
+    elif 12 < used_hour <= 18:
+        period = 'tarde'
+    elif 18 < used_hour <= 23:
+        period = 'noite'
     # Formal time
     if formal:
-        clock = HOURS[usedHour]
-        if usedHour in [0, 1]:
+        clock = HOURS[used_hour]
+        if used_hour in [0, 1]:
             clock += ' hora'
         else:
             clock += ' horas'
@@ -150,13 +151,13 @@ def naturalclock(value, formal=True):
             clock += ' e ' + MINUTES[value.minute] + ' minutos'
     # Informal time
     else:
-        if usedHour > 12:
-            usedHour -= 12
-        clock = HOURS[usedHour]
+        if used_hour > 12:
+            used_hour -= 12
+        clock = HOURS[used_hour]
 
-        if usedHour == 0:
+        if used_hour == 0:
             clock = 'meia noite'
-        elif usedHour == 12:
+        elif used_hour == 12:
             clock = 'meio dia'
         if value.minute in [40, 45, 50, 55]:
             clock = MINUTES[60 - value.minute] + ' para ' + clock
@@ -165,9 +166,8 @@ def naturalclock(value, formal=True):
         elif value.minute != 0:
             clock += ' e ' + MINUTES[value.minute]
         try:
-            periodo
-            clock += ' da ' + periodo
-        except:
+            clock += ' da ' + period
+        except UnboundLocalError:
             pass
     return str(clock)
 
@@ -185,16 +185,16 @@ def date_and_delta(value):
     """Turn a value into a date and a timedelta which represents how long ago
     it was. If that's not possible, return (None, value)."""
     now = _now()
-    if isinstance(value, datetime):
+    if isinstance(value, datetime.datetime):
         date = value
         delta = now - value
-    elif isinstance(value, timedelta):
+    elif isinstance(value, datetime.timedelta):
         date = now - value
         delta = value
     else:
         try:
             value = int(value)
-            delta = timedelta(seconds=value)
+            delta = datetime.timedelta(seconds=value)
             date = now - delta
         except (ValueError, TypeError):
             return (None, value)
@@ -222,18 +222,18 @@ def naturaldelta(value, months=True):
     if not years and days < 1:
         if seconds == 0:
             return "um momento"
-        elif seconds == 1:
+        if seconds == 1:
             return "um segundo"
-        elif seconds < 60:
+        if seconds < 60:
             return "%d segundos" % seconds
-        elif 60 <= seconds < 120:
+        if 60 <= seconds < 120:
             return "um minuto"
-        elif 120 <= seconds < 3600:
+        if 120 <= seconds < 3600:
             minutes = seconds // 60
             return "%d minutos" % minutes
-        elif 3600 <= seconds < 3600 * 2:
+        if 3600 <= seconds < 3600 * 2:
             return "uma hora"
-        elif 3600 < seconds:
+        if seconds > 3600:
             hours = seconds // 3600
             return "%d horas" % hours
     elif years == 0:
@@ -241,30 +241,24 @@ def naturaldelta(value, months=True):
             return "um dia"
         if not use_months:
             return "%d dias" % days
-        else:
-            if not months:
-                return "%d dias" % days
-            elif months == 1:
-                return "um mês"
-            else:
-                return "%d meses" % months
+        if not months:
+            return "%d dias" % days
+        if months == 1:
+            return "um mês"
+        return "%d meses" % months
     elif years == 1:
         if not months and not days:
             return "um ano"
-        elif not months:
+        if not months:
             if days == 1:
                 return "1 ano e 1 dia"
-            else:
-                return "1 ano e %d dias" % days
-        elif use_months:
+            return "1 ano e %d dias" % days
+        if use_months:
             if months == 1:
                 return "1 ano e 1 mês"
-            else:
-                return "1 ano e %d meses" % months
-        else:
-            return "1 ano e %d dias" % days
-    else:
-        return "%d anos" % years
+            return "1 ano e %d meses" % months
+        return "1 ano e %d dias" % days
+    return "%d anos" % years
 
 
 def naturaltime(value, future=False, months=True):
@@ -279,7 +273,7 @@ def naturaltime(value, future=False, months=True):
     if date is None:
         return value
     # determine tense by value only if datetime/timedelta were passed
-    if isinstance(value, (datetime, timedelta)):
+    if isinstance(value, (datetime.datetime, datetime.timedelta)):
         future = date > now
 
     ago = 'em %s' if future else 'há %s'
@@ -291,25 +285,25 @@ def naturaltime(value, future=False, months=True):
     return ago % delta
 
 
-def naturalday(value, hasYear=False):
+def naturalday(value, has_year=False):
     """For date values that are tomorrow, today or yesterday compared to
     present day returns representing string. Otherwise, returns a string
     formatted according to ``format``."""
     try:
-        value = date(value.year, value.month, value.day)
+        value = datetime.date(value.year, value.month, value.day)
     except (AttributeError, OverflowError, ValueError):
         # Passed value wasn't date-ish or date arguments out of range
         return value
-    delta = value - date.today()
+    delta = value - datetime.date.today()
     if delta.days == 0:
         return 'hoje'
-    elif delta.days == 1:
+    if delta.days == 1:
         return 'amanhã'
-    elif delta.days == -1:
+    if delta.days == -1:
         return 'ontem'
     month = MONTHS[value.month]
     natday = '{0} de {1}'.format(value.day, month)
-    if hasYear:
+    if has_year:
         natday += ' de {0}'.format(value.year)
     return natday
 
@@ -319,16 +313,16 @@ def naturalyear(value):
     present year returns representing string. Otherwise, returns a string
     formatted according to the year."""
     try:
-        value = date(value.year, value.month, value.day)
+        value = datetime.date(value.year, value.month, value.day)
     except (AttributeError, OverflowError, ValueError):
         # Passed value wasn't date-ish or date arguments out of range
         return value
-    delta = value.year - date.today().year
+    delta = value.year - datetime.date.today().year
     if delta == 0:
         return 'este ano'
-    elif delta == 1:
+    if delta == 1:
         return 'ano que vem'
-    elif delta == -1:
+    if delta == -1:
         return 'ano passado'
     return str(value.year)
 
@@ -337,11 +331,11 @@ def naturaldate(value):
     """Like naturalday, but will append a year for dates that are a year
     ago or more."""
     try:
-        value = date(value.year, value.month, value.day)
+        value = datetime.date(value.year, value.month, value.day)
     except (AttributeError, OverflowError, ValueError):
         # Passed value wasn't date-ish or date arguments out of range
         return value
-    delta = abs_timedelta(value - date.today())
+    delta = abs_timedelta(value - datetime.date.today())
     if delta.days >= 365:
         return naturalday(value, True)
     return naturalday(value)

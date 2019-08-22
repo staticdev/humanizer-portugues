@@ -3,73 +3,98 @@
 
 """Tests for time humanizing."""
 
-from unittest.mock import patch
+import datetime
+import unittest.mock
 
-from humanizer_portugues.time import date_and_delta, naturalclock, naturaldate, naturalday, naturaldelta, naturaltime, naturalyear
-from datetime import date, datetime, time, timedelta
+import humanizer_portugues.time
 from .base import HumanizeTestCase
 
-today = date.today()
-one_day = timedelta(days=1)
-one_year = timedelta(days=365)
+TODAY = datetime.date.today()
+ONE_DAY = datetime.timedelta(days=1)
+ONE_YEAR = datetime.timedelta(days=365)
 
-class fakedate(object):
+
+class FakeDate():
+    """Test helper to fake date"""
     def __init__(self, year, month, day):
         self.year, self.month, self.day = year, month, day
 
-class faketime(object):
+
+class FakeTime():
+    """Test helper class to fake time"""
     def __init__(self, hour, minute, second):
         self.hour, self.minute, self.second = hour, minute, second
 
+
 class TimeUtilitiesTestCase(HumanizeTestCase):
-    """These are not considered "public" interfaces, but require tests anyway."""
+    """These are not considered "public" interfaces, but require tests anyway.
+    """
     def test_date_and_delta(self):
-        now = datetime.now()
-        td = timedelta
+        """Tests date_and_delta utility method"""
+        now = datetime.datetime.now()
+        tdelta = datetime.timedelta
         int_tests = (3, 29, 86399, 86400, 86401*30)
-        date_tests = [now - td(seconds=x) for x in int_tests]
-        td_tests = [td(seconds=x) for x in int_tests]
-        results = [(now - td(seconds=x), td(seconds=x)) for x in int_tests]
-        for t in (int_tests, date_tests, td_tests):
-            for arg, result in zip(t, results):
-                dt, d = date_and_delta(arg)
-                self.assertEqualDatetime(dt, result[0])
-                self.assertEqualTimedelta(d, result[1])
-        self.assertEqual(date_and_delta("NaN"), (None, "NaN"))
+        date_tests = [now - tdelta(seconds=x) for x in int_tests]
+        td_tests = [tdelta(seconds=x) for x in int_tests]
+        results = [(now - tdelta(seconds=x),
+                    tdelta(seconds=x)) for x in int_tests]
+        for test in (int_tests, date_tests, td_tests):
+            for arg, result in zip(test, results):
+                dtime, delta = humanizer_portugues.time.date_and_delta(arg)
+                self.assertEqualDatetime(dtime, result[0])
+                self.assertEqualTimedelta(delta, result[1])
+        self.assertEqual(humanizer_portugues.time.date_and_delta("NaN"),
+                         (None, "NaN"))
+
 
 class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time"""
     def test_naturalclock_formal(self):
-        meia_noite_meia = time(0, 30, 0)
-        treze_um = time(13, 1, 0)
-        dez_p_cinco = time(4, 50, 10)
-        cinco_p_meiodia = time(11, 55, 0)
-        vinteuma = time(21, 0, 40)
-        overflowtest = faketime(120390192341, 2, 2)
-        test_list = ('Not a time at all.', meia_noite_meia, treze_um, dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
-        result_list = ('Not a time at all.', 'zero hora e trinta minutos', 'treze horas e um minuto', 'dez minutos para cinco horas', 'cinco minutos para doze horas', 'vinte e uma horas', overflowtest)
-        self.assertManyResults(naturalclock, test_list, result_list)
+        """Tests naturalclock method"""
+        meia_noite_meia = datetime.time(0, 30, 0)
+        treze_um = datetime.time(13, 1, 0)
+        dez_p_cinco = datetime.time(4, 50, 10)
+        cinco_p_meiodia = datetime.time(11, 55, 0)
+        vinteuma = datetime.time(21, 0, 40)
+        overflowtest = FakeTime(120390192341, 2, 2)
+        test_list = ('Not a time at all.', meia_noite_meia, treze_um,
+                     dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
+        result_list = ('Not a time at all.', 'zero hora e trinta minutos',
+                       'treze horas e um minuto',
+                       'dez minutos para cinco horas',
+                       'cinco minutos para doze horas', 'vinte e uma horas',
+                       overflowtest)
+        self.assertManyResults(humanizer_portugues.time.naturalclock,
+                               test_list, result_list)
 
     def test_naturalclock_informal(self):
-        meia_noite_meia = time(0, 30, 0)
-        treze_um = time(13, 1, 0)
-        dez_p_cinco = time(4, 50, 10)
-        cinco_p_meiodia = time(11, 55, 0)
-        vinteuma = time(21, 0, 40)
-        overflowtest = faketime(120390192341, 2, 2)
-        test_list = ('Not a time at all.', meia_noite_meia, treze_um, dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
-        result_list = ('Not a time at all.', 'meia noite e meia', 'uma e um da tarde', 'dez para cinco da manhã', 'cinco para meio dia', 'nove da noite', overflowtest)
-        nc_informal = lambda d: naturalclock(d, formal=False)
-        self.assertManyResults(nc_informal, test_list, result_list)
+        """Tests naturalclock method with formal=False"""
+        meia_noite_meia = datetime.time(0, 30, 0)
+        treze_um = datetime.time(13, 1, 0)
+        dez_p_cinco = datetime.time(4, 50, 10)
+        cinco_p_meiodia = datetime.time(11, 55, 0)
+        vinteuma = datetime.time(21, 0, 40)
+        overflowtest = FakeTime(120390192341, 2, 2)
+        test_list = ('Not a time at all.', meia_noite_meia, treze_um,
+                     dez_p_cinco, cinco_p_meiodia, vinteuma, overflowtest)
+        result_list = ('Not a time at all.', 'meia noite e meia',
+                       'uma e um da tarde', 'dez para cinco da manhã',
+                       'cinco para meio dia', 'nove da noite', overflowtest)
+        self.assertManyResults(
+            lambda d: humanizer_portugues.time.naturalclock(d, formal=False),
+            test_list, result_list)
 
-    def test_naturaldelta_nomeses(self):
-        now = datetime.now()
+    @unittest.mock.patch('humanizer_portugues.time._now')
+    def test_naturaldelta_nomonths(self, mocked):
+        """Tests naturaldelta method with months=False"""
+        now = datetime.datetime.now()
+        mocked.return_value = now
         test_list = [
-            timedelta(days=7),
-            timedelta(days=31),
-            timedelta(days=230),
-            timedelta(days=366),
-            timedelta(days=400),
+            datetime.timedelta(days=7),
+            datetime.timedelta(days=31),
+            datetime.timedelta(days=230),
+            datetime.timedelta(days=366),
+            datetime.timedelta(days=400),
         ]
         result_list = [
             '7 dias',
@@ -78,44 +103,46 @@ class TimeTestCase(HumanizeTestCase):
             '1 ano e 1 dia',
             '1 ano e 35 dias',
         ]
-        with patch('humanizer_portugues.time._now') as mocked:
-            mocked.return_value = now
-            nd_nomeses = lambda d: naturaldelta(d, months=False)
-            self.assertManyResults(nd_nomeses, test_list, result_list)
+        self.assertManyResults(
+            lambda d: humanizer_portugues.time.naturaldelta(d, months=False),
+            test_list, result_list)
 
-    def test_naturaldelta(self):
-        now = datetime.now()
+    @unittest.mock.patch('humanizer_portugues.time._now')
+    def test_naturaldelta(self, mocked):
+        """Tests naturaldelta method"""
+        now = datetime.datetime.now()
+        mocked.return_value = now
         test_list = [
             0,
             1,
             30,
-            timedelta(minutes=1, seconds=30),
-            timedelta(minutes=2),
-            timedelta(hours=1, minutes=30, seconds=30),
-            timedelta(hours=23, minutes=50, seconds=50),
-            timedelta(days=1),
-            timedelta(days=500),
-            timedelta(days=365*2 + 35),
-            timedelta(seconds=1),
-            timedelta(seconds=30),
-            timedelta(minutes=1, seconds=30),
-            timedelta(minutes=2),
-            timedelta(hours=1, minutes=30, seconds=30),
-            timedelta(hours=23, minutes=50, seconds=50),
-            timedelta(days=1),
-            timedelta(days=500),
-            timedelta(days=365*2 + 35),
+            datetime.timedelta(minutes=1, seconds=30),
+            datetime.timedelta(minutes=2),
+            datetime.timedelta(hours=1, minutes=30, seconds=30),
+            datetime.timedelta(hours=23, minutes=50, seconds=50),
+            datetime.timedelta(days=1),
+            datetime.timedelta(days=500),
+            datetime.timedelta(days=365*2 + 35),
+            datetime.timedelta(seconds=1),
+            datetime.timedelta(seconds=30),
+            datetime.timedelta(minutes=1, seconds=30),
+            datetime.timedelta(minutes=2),
+            datetime.timedelta(hours=1, minutes=30, seconds=30),
+            datetime.timedelta(hours=23, minutes=50, seconds=50),
+            datetime.timedelta(days=1),
+            datetime.timedelta(days=500),
+            datetime.timedelta(days=365*2 + 35),
             # regression tests for bugs in post-release humanize
-            timedelta(days=10000),
-            timedelta(days=365+35),
+            datetime.timedelta(days=10000),
+            datetime.timedelta(days=365+35),
             30,
-            timedelta(days=365*2 + 65),
-            timedelta(days=365 + 1),
-            timedelta(days=365 + 4),
-            timedelta(days=35),
-            timedelta(days=65),
-            timedelta(days=9),
-            timedelta(days=365),
+            datetime.timedelta(days=365*2 + 65),
+            datetime.timedelta(days=365 + 1),
+            datetime.timedelta(days=365 + 4),
+            datetime.timedelta(days=35),
+            datetime.timedelta(days=65),
+            datetime.timedelta(days=9),
+            datetime.timedelta(days=365),
             "NaN",
         ]
         result_list = [
@@ -150,38 +177,40 @@ class TimeTestCase(HumanizeTestCase):
             'um ano',
             "NaN",
         ]
-        with patch('humanizer_portugues.time._now') as mocked:
-            mocked.return_value = now
-            self.assertManyResults(naturaldelta, test_list, result_list)
+        self.assertManyResults(humanizer_portugues.time.naturaldelta,
+                               test_list, result_list)
 
-    def test_naturaltime(self):
-        now = datetime.now()
+    @unittest.mock.patch('humanizer_portugues.time._now')
+    def test_naturaltime(self, mocked):
+        """Tests naturaltime method"""
+        now = datetime.datetime.now()
+        mocked.return_value = now
         test_list = [
             now,
-            now - timedelta(seconds=1),
-            now - timedelta(seconds=30),
-            now - timedelta(minutes=1, seconds=30),
-            now - timedelta(minutes=2),
-            now - timedelta(hours=1, minutes=30, seconds=30),
-            now - timedelta(hours=23, minutes=50, seconds=50),
-            now - timedelta(days=1),
-            now - timedelta(days=500),
-            now - timedelta(days=365*2 + 35),
-            now + timedelta(seconds=1),
-            now + timedelta(seconds=30),
-            now + timedelta(minutes=1, seconds=30),
-            now + timedelta(minutes=2),
-            now + timedelta(hours=1, minutes=30, seconds=30),
-            now + timedelta(hours=23, minutes=50, seconds=50),
-            now + timedelta(days=1),
-            now + timedelta(days=500),
-            now + timedelta(days=365*2 + 35),
+            now - datetime.timedelta(seconds=1),
+            now - datetime.timedelta(seconds=30),
+            now - datetime.timedelta(minutes=1, seconds=30),
+            now - datetime.timedelta(minutes=2),
+            now - datetime.timedelta(hours=1, minutes=30, seconds=30),
+            now - datetime.timedelta(hours=23, minutes=50, seconds=50),
+            now - datetime.timedelta(days=1),
+            now - datetime.timedelta(days=500),
+            now - datetime.timedelta(days=365*2 + 35),
+            now + datetime.timedelta(seconds=1),
+            now + datetime.timedelta(seconds=30),
+            now + datetime.timedelta(minutes=1, seconds=30),
+            now + datetime.timedelta(minutes=2),
+            now + datetime.timedelta(hours=1, minutes=30, seconds=30),
+            now + datetime.timedelta(hours=23, minutes=50, seconds=50),
+            now + datetime.timedelta(days=1),
+            now + datetime.timedelta(days=500),
+            now + datetime.timedelta(days=365*2 + 35),
             # regression tests for bugs in post-release humanize
-            now + timedelta(days=10000),
-            now - timedelta(days=365+35),
+            now + datetime.timedelta(days=10000),
+            now - datetime.timedelta(days=365+35),
             30,
-            now - timedelta(days=365*2 + 65),
-            now - timedelta(days=365 + 4),
+            now - datetime.timedelta(days=365*2 + 65),
+            now - datetime.timedelta(days=365 + 4),
             "NaN",
         ]
         result_list = [
@@ -211,40 +240,42 @@ class TimeTestCase(HumanizeTestCase):
             'há 1 ano e 4 dias',
             "NaN",
         ]
-        with patch('humanizer_portugues.time._now') as mocked:
-            mocked.return_value = now
-            self.assertManyResults(naturaltime, test_list, result_list)
+        self.assertManyResults(humanizer_portugues.time.naturaltime,
+                               test_list, result_list)
 
-    def test_naturaltime_nomonths(self):
-        now = datetime.now()
+    @unittest.mock.patch('humanizer_portugues.time._now')
+    def test_naturaltime_nomonths(self, mocked):
+        """Tests naturaltime method with months=False"""
+        now = datetime.datetime.now()
+        mocked.return_value = now
         test_list = [
             now,
-            now - timedelta(seconds=1),
-            now - timedelta(seconds=30),
-            now - timedelta(minutes=1, seconds=30),
-            now - timedelta(minutes=2),
-            now - timedelta(hours=1, minutes=30, seconds=30),
-            now - timedelta(hours=23, minutes=50, seconds=50),
-            now - timedelta(days=1),
-            now - timedelta(days=17),
-            now - timedelta(days=47),
-            now - timedelta(days=500),
-            now - timedelta(days=365*2 + 35),
-            now + timedelta(seconds=1),
-            now + timedelta(seconds=30),
-            now + timedelta(minutes=1, seconds=30),
-            now + timedelta(minutes=2),
-            now + timedelta(hours=1, minutes=30, seconds=30),
-            now + timedelta(hours=23, minutes=50, seconds=50),
-            now + timedelta(days=1),
-            now + timedelta(days=500),
-            now + timedelta(days=365*2 + 35),
+            now - datetime.timedelta(seconds=1),
+            now - datetime.timedelta(seconds=30),
+            now - datetime.timedelta(minutes=1, seconds=30),
+            now - datetime.timedelta(minutes=2),
+            now - datetime.timedelta(hours=1, minutes=30, seconds=30),
+            now - datetime.timedelta(hours=23, minutes=50, seconds=50),
+            now - datetime.timedelta(days=1),
+            now - datetime.timedelta(days=17),
+            now - datetime.timedelta(days=47),
+            now - datetime.timedelta(days=500),
+            now - datetime.timedelta(days=365*2 + 35),
+            now + datetime.timedelta(seconds=1),
+            now + datetime.timedelta(seconds=30),
+            now + datetime.timedelta(minutes=1, seconds=30),
+            now + datetime.timedelta(minutes=2),
+            now + datetime.timedelta(hours=1, minutes=30, seconds=30),
+            now + datetime.timedelta(hours=23, minutes=50, seconds=50),
+            now + datetime.timedelta(days=1),
+            now + datetime.timedelta(days=500),
+            now + datetime.timedelta(days=365*2 + 35),
             # regression tests for bugs in post-release humanize
-            now + timedelta(days=10000),
-            now - timedelta(days=365+35),
+            now + datetime.timedelta(days=10000),
+            now - datetime.timedelta(days=365+35),
             30,
-            now - timedelta(days=365*2 + 65),
-            now - timedelta(days=365 + 4),
+            now - datetime.timedelta(days=365*2 + 65),
+            now - datetime.timedelta(days=365 + 4),
             "NaN",
         ]
         result_list = [
@@ -276,62 +307,64 @@ class TimeTestCase(HumanizeTestCase):
             'há 1 ano e 4 dias',
             "NaN",
         ]
-        with patch('humanizer_portugues.time._now') as mocked:
-            mocked.return_value = now
-            nt_nomonths = lambda d: naturaltime(d, months=False)
-            self.assertManyResults(nt_nomonths, test_list, result_list)
+        self.assertManyResults(
+            lambda d: humanizer_portugues.time.naturaltime(d, months=False),
+            test_list, result_list)
 
     def test_naturalday(self):
-        tomorrow = today + one_day
-        yesterday = today - one_day
-        if today.month != 3:
-            someday = date(today.year, 3, 5)
+        """Tests naturalday method"""
+        tomorrow = TODAY + ONE_DAY
+        yesterday = TODAY - ONE_DAY
+        if TODAY.month != 3:
+            someday = datetime.date(TODAY.year, 3, 5)
             someday_result = '5 de março'
         else:
-            someday = date(today.year, 9, 5)
+            someday = datetime.date(TODAY.year, 9, 5)
             someday_result = '5 de setembro'
-        valerrtest = fakedate(290149024, 2, 2)
-        overflowtest = fakedate(120390192341, 2, 2)
-        test_list = (today, tomorrow, yesterday, someday, '02/26/1984',
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
+        valerrtest = FakeDate(290149024, 2, 2)
+        overflowtest = FakeDate(120390192341, 2, 2)
+        test_list = (TODAY, tomorrow, yesterday, someday, '02/26/1984',
+                     None, "Not a date at all.", valerrtest, overflowtest)
         result_list = ('hoje', 'amanhã', 'ontem', someday_result, '02/26/1984',
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
-        self.assertManyResults(naturalday, test_list, result_list)
+                       None, "Not a date at all.", valerrtest, overflowtest)
+        self.assertManyResults(humanizer_portugues.time.naturalday,
+                               test_list, result_list)
 
     def test_naturaldate(self):
-        tomorrow = today + one_day
-        yesterday = today - one_day
+        """Tests naturaldate method"""
+        tomorrow = TODAY + ONE_DAY
+        yesterday = TODAY - ONE_DAY
 
-        if today.month != 3:
-            someday = date(today.year, 3, 5)
+        if TODAY.month != 3:
+            someday = datetime.date(TODAY.year, 3, 5)
             someday_result = '5 de março'
         else:
-            someday = date(today.year, 9, 5)
+            someday = datetime.date(TODAY.year, 9, 5)
             someday_result = '5 de setembro'
-        valerrtest = fakedate(290149024, 2, 2)
-        overflowtest = fakedate(120390192341, 2, 2)
+        valerrtest = FakeDate(290149024, 2, 2)
+        overflowtest = FakeDate(120390192341, 2, 2)
 
-        test_list = (today, tomorrow, yesterday, someday, date(1982, 6, 27), 
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
-        result_list = ('hoje', 'amanhã', 'ontem', someday_result, '27 de junho de 1982',
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
-        self.assertManyResults(naturaldate, test_list, result_list)
+        test_list = (TODAY, tomorrow, yesterday, someday,
+                     datetime.date(1982, 6, 27), None, "Not a date at all.",
+                     valerrtest, overflowtest)
+        result_list = ('hoje', 'amanhã', 'ontem', someday_result,
+                       '27 de junho de 1982', None, "Not a date at all.",
+                       valerrtest, overflowtest)
+        self.assertManyResults(humanizer_portugues.time.naturaldate,
+                               test_list, result_list)
 
     def test_naturalyear(self):
-        next_year = today + one_year
-        last_year = today - one_year
+        """Tests naturalyear method"""
+        next_year = TODAY + ONE_YEAR
+        last_year = TODAY - ONE_YEAR
 
-        someyear = fakedate(1988, 1, 1)
-        valerrtest = fakedate(290149024, 2, 2)
-        overflowtest = fakedate(120390192341, 2, 2)
-        test_list = (today, next_year, last_year, '1955', someyear,
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
-        result_list = ('este ano', 'ano que vem', 'ano passado', '1955', '1988',
-            None, "Not a date at all.", valerrtest, overflowtest
-        )
-        self.assertManyResults(naturalyear, test_list, result_list)
+        someyear = FakeDate(1988, 1, 1)
+        valerrtest = FakeDate(290149024, 2, 2)
+        overflowtest = FakeDate(120390192341, 2, 2)
+        test_list = (TODAY, next_year, last_year, '1955', someyear,
+                     None, "Not a date at all.", valerrtest, overflowtest)
+        result_list = ('este ano', 'ano que vem', 'ano passado', '1955',
+                       '1988', None, "Not a date at all.", valerrtest,
+                       overflowtest)
+        self.assertManyResults(humanizer_portugues.time.naturalyear,
+                               test_list, result_list)

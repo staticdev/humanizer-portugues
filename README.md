@@ -1,5 +1,4 @@
-humanizer-portugues
-===================
+# humanizer-portugues
 
 ![Travis](https://api.travis-ci.org/staticdev/humanizer-portugues.svg?branch=master)
 ![Codecov](https://codecov.io/github/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)
@@ -16,27 +15,25 @@ python3, correções de tradução, formato e adição de humanização de
 listas. Além disso, foi retirado o recurso de localização (i18n)
 facilitando sua utilização para português.
 
-Instalação
-----------
+## Instalação
 
 Para instalar o `humanizer-portugues` execute o comando:
 
-``` {.sourceCode .sh}
+```sh
 pip install humanizer-portugues
 ```
 
-Uso
----
+## Uso
 
 Para importar o pacote basta executar:
 
-``` {.sourceCode .python}
+```python
 import humanizer_portugues
 ```
 
 Humanization de inteiros:
 
-``` {.sourceCode .python}
+```python
 humanizer_portugues.intcomma(12345)
 '12,345'
 
@@ -55,7 +52,7 @@ humanizer_portugues.apnumber(41)
 
 Humanization datas e horas:
 
-``` {.sourceCode .python}
+```python
 import datetime
 humanizer_portugues.naturalclock(datetime.time(0, 30, 0))
 'zero hora e trinta minutos'
@@ -87,7 +84,7 @@ humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(sec
 
 Humanization de tamanho de arquivos:
 
-``` {.sourceCode .python}
+```python
 humanizer_portugues.naturalsize(1000000)
 '1.0 MB'
 
@@ -100,7 +97,7 @@ humanizer_portugues.naturalsize(1000000, gnu=True)
 
 Humanization de números de ponto flutuante:
 
-``` {.sourceCode .python}
+```python
 humanizer_portugues.fractional(1/3)
 '1/3'
 
@@ -119,7 +116,7 @@ humanizer_portugues.fractional(1)
 
 Humanization de listas:
 
-``` {.sourceCode .python}
+```python
 humanizer_portugues.naturallist(['Cláudio', 'Maria'], ',')
 'Cláudio, Maria'
 

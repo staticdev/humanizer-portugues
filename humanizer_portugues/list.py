@@ -1,23 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Lists related humanization."""
+
 __all__ = ['naturallist']
 
-SPACE = ' '
 
 def naturallist(itens, separator, conjunction=None):
+    """
+    Returns human readable list separated by separator
+    Optional argument is conjuntion that substitutes the last separator
+    """
     len_itens = len(itens)
     if len_itens == 0:
         return ''
-    elif len_itens == 1:
+    if len_itens == 1:
         return itens[0]
+    phrase = itens[0]
+    if conjunction:
+        for i in range(1, len_itens - 1):
+            phrase += '%s %s' % (separator, itens[i])
+        phrase += ' %s %s' % (conjunction, itens[len_itens - 1])
     else:
-        phrase = itens[0]
-        if conjunction:
-            for n in range(1, len_itens - 1):
-                phrase += separator + SPACE + itens[n]
-            phrase += SPACE + conjunction + SPACE + itens[len_itens - 1]
-        else:
-            for n in range(1, len_itens):
-                phrase += separator + SPACE + itens[n]
-        return phrase
+        for i in range(1, len_itens):
+            phrase += '%s %s' % (separator, itens[i])
+    return phrase
