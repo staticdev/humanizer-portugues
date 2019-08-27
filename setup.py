@@ -1,17 +1,19 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import codecs
 import os.path
 import re
-import sys
+import setuptools
 
-from setuptools import setup, find_packages
-
-here = os.path.abspath(os.path.dirname(__file__))
 
 def read(*parts):
+    here = os.path.abspath(os.path.dirname(__file__))
     return codecs.open(os.path.join(here, *parts), 'r').read()
 
+
 def find_version(*file_paths):
+    """Gets version on __init__.py"""
     version_file = read(*file_paths)
     version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
                               version_file, re.M)
@@ -19,14 +21,12 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-long_description = read('README.md')
-requires = []
-
-setup(
+setuptools.setup(
     name='humanizer-portugues',
     version=find_version("humanizer_portugues", "__init__.py"),
-    description="Funcoes para humanizacao (humanize) para python ",
-    long_description=long_description,
+    description="Funções para humanização (humanize) para python ",
+    long_description=read('README.md'),
+    long_description_content_type="text/markdown",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
@@ -42,10 +42,10 @@ setup(
     maintainer_email='thiagocavila@gmail.com',
     url='https://github.com/staticdev/humanizer-portugues',
     license='MIT',
-    packages=find_packages(),
+    packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=False,
     test_suite="tests",
     tests_require=['mock'],
-    install_requires=requires,
+    install_requires=[],
 )
