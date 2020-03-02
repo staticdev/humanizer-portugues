@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "humanizer-portugues"
+version = "2.0.0"
+description = "Funções para humanização (humanize) em português."
+authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/staticdev/humanizer-portugues"
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[tool.poetry.dev-dependencies]
+codecov = "^2.0.16"
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

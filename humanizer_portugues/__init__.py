@@ -3,7 +3,7 @@ from humanizer_portugues.time import *
 from humanizer_portugues.number import *
 from humanizer_portugues.filesize import *
 
-__version__ = "1.2.2"
+__version__ = "2.0.0"
 __all__ = ['__version__', 'naturallist', 'naturalday', 'naturaltime',
            'naturalyear', 'ordinal', 'intword', 'naturaldelta', 'intcomma',
            'apnumber', 'fractional', 'naturalsize', 'naturaldate']
