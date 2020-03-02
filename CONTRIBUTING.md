@@ -1,9 +1,11 @@
-Contributing to humanizer-portugues
-===================================
+# Contributing to humanizer-portugues
 
-Sempre verifique crie, verifique os teestes unitários, mantendo a cobertura de código:
+- Install [Poetry](https://python-poetry.org/)
+- Create a fork and clone it
+- Change and create unit tests
+- Verify:
 
-``` {.sourceCode .sh}
+```sh
 pip3 install codecov
 coverage run --omit="*/tests/*" -m unittest discover # executa testes
 coverage report # mostra cobertura
