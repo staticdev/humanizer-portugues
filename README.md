@@ -1,8 +1,9 @@
 # humanizer-portugues
 
 ![Travis](https://api.travis-ci.org/staticdev/humanizer-portugues.svg?branch=master)
-![Codecov](https://codecov.io/github/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)
+[![Codecov](https://codecov.io/gh/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)](https://codecov.io/gh/staticdev/humanizer-portugues)
 ![PyPi](https://badge.fury.io/py/humanizer-portugues.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Este pacote contém várias funções de humanização (humanization), como
 transformar um número em uma duração legível para humanos ('três minutos
