@@ -6,8 +6,14 @@
 
 import datetime
 
-__all__ = ['naturalclock', 'naturaldelta', 'naturaltime',
-           'naturalday', 'naturaldate', 'naturalyear']
+__all__ = [
+    "naturalclock",
+    "naturaldelta",
+    "naturaltime",
+    "naturalday",
+    "naturaldate",
+    "naturalyear",
+]
 
 MONTHS = {
     1: "janeiro",
@@ -21,7 +27,7 @@ MONTHS = {
     9: "setembro",
     10: "outubro",
     11: "novembro",
-    12: "dezembro"
+    12: "dezembro",
 }
 
 HOURS = {
@@ -48,7 +54,7 @@ HOURS = {
     20: "vinte",
     21: "vinte e uma",
     22: "vinte e duas",
-    23: "vinte e três"
+    23: "vinte e três",
 }
 
 MINUTES = {
@@ -110,7 +116,7 @@ MINUTES = {
     56: "cinquenta e seis",
     57: "cinquenta e sete",
     58: "cinquenta e oito",
-    59: "cinquenta e nove"
+    59: "cinquenta e nove",
 }
 
 
@@ -131,24 +137,24 @@ def naturalclock(value, formal=True):
     else:
         used_hour = value.hour
     if 0 < used_hour <= 11:
-        period = 'manhã'
+        period = "manhã"
     elif 12 < used_hour <= 18:
-        period = 'tarde'
+        period = "tarde"
     elif 18 < used_hour <= 23:
-        period = 'noite'
+        period = "noite"
     # Formal time
     if formal:
         clock = HOURS[used_hour]
         if used_hour in [0, 1]:
-            clock += ' hora'
+            clock += " hora"
         else:
-            clock += ' horas'
+            clock += " horas"
         if value.minute in [40, 45, 50, 55]:
-            clock = MINUTES[60 - value.minute] + ' minutos para ' + clock
+            clock = MINUTES[60 - value.minute] + " minutos para " + clock
         elif value.minute == 1:
-            clock += ' e um minuto'
+            clock += " e um minuto"
         elif value.minute != 0:
-            clock += ' e ' + MINUTES[value.minute] + ' minutos'
+            clock += " e " + MINUTES[value.minute] + " minutos"
     # Informal time
     else:
         if used_hour > 12:
@@ -156,17 +162,17 @@ def naturalclock(value, formal=True):
         clock = HOURS[used_hour]
 
         if used_hour == 0:
-            clock = 'meia noite'
+            clock = "meia noite"
         elif used_hour == 12:
-            clock = 'meio dia'
+            clock = "meio dia"
         if value.minute in [40, 45, 50, 55]:
-            clock = MINUTES[60 - value.minute] + ' para ' + clock
+            clock = MINUTES[60 - value.minute] + " para " + clock
         elif value.minute == 30:
-            clock += ' e meia'
+            clock += " e meia"
         elif value.minute != 0:
-            clock += ' e ' + MINUTES[value.minute]
+            clock += " e " + MINUTES[value.minute]
         try:
-            clock += ' da ' + period
+            clock += " da " + period
         except UnboundLocalError:
             pass
     return str(clock)
@@ -276,7 +282,7 @@ def naturaltime(value, future=False, months=True):
     if isinstance(value, (datetime.datetime, datetime.timedelta)):
         future = date > now
 
-    ago = 'em %s' if future else 'há %s'
+    ago = "em %s" if future else "há %s"
     delta = naturaldelta(delta, months)
 
     if delta == "um momento":
@@ -296,15 +302,15 @@ def naturalday(value, has_year=False):
         return value
     delta = value - datetime.date.today()
     if delta.days == 0:
-        return 'hoje'
+        return "hoje"
     if delta.days == 1:
-        return 'amanhã'
+        return "amanhã"
     if delta.days == -1:
-        return 'ontem'
+        return "ontem"
     month = MONTHS[value.month]
-    natday = '{0} de {1}'.format(value.day, month)
+    natday = "{0} de {1}".format(value.day, month)
     if has_year:
-        natday += ' de {0}'.format(value.year)
+        natday += " de {0}".format(value.year)
     return natday
 
 
@@ -319,11 +325,11 @@ def naturalyear(value):
         return value
     delta = value.year - datetime.date.today().year
     if delta == 0:
-        return 'este ano'
+        return "este ano"
     if delta == 1:
-        return 'ano que vem'
+        return "ano que vem"
     if delta == -1:
-        return 'ano passado'
+        return "ano passado"
     return str(value.year)
 
 

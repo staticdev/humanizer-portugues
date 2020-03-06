@@ -3,8 +3,8 @@
 
 """Humanizing functions for numbers."""
 
-import re
 from fractions import Fraction
+import re
 
 
 def ordinal(value):
@@ -15,7 +15,7 @@ def ordinal(value):
         value = int(value)
     except (TypeError, ValueError):
         return value
-    return '%d%s' % (value, 'º')
+    return "%d%s" % (value, "º")
 
 
 def intcomma(value):
@@ -25,24 +25,35 @@ def intcomma(value):
     floats."""
     try:
         if isinstance(value, str):
-            float(value.replace(',', ''))
+            float(value.replace(",", ""))
         else:
             float(value)
     except (TypeError, ValueError):
         return value
     orig = str(value)
-    new = re.sub("^(-?\d+)(\d{3})", '\g<1>,\g<2>', orig)
+    new = re.sub(r"^(-?\d+)(\d{3})", r"\g<1>,\g<2>", orig)
     if orig == new:
         return new
     return intcomma(new)
 
+
 POWERS = [10 ** x for x in (6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 100)]
-HUMAN_POWERS = ('milhão', 'bilhão', 'trilhão', 'quatrilhão',
-                'quintilhão', 'sextilhão', 'septilhão',
-                'octilhão', 'nonilhão', 'decilhão', 'googol')
+HUMAN_POWERS = (
+    "milhão",
+    "bilhão",
+    "trilhão",
+    "quatrilhão",
+    "quintilhão",
+    "sextilhão",
+    "septilhão",
+    "octilhão",
+    "nonilhão",
+    "decilhão",
+    "googol",
+)
 
 
-def intword(value, formatting='%.1f'):
+def intword(value, formatting="%.1f"):
     """Converts a large integer to a friendly text representation. Works best for
     numbers over 1 million. For example, 1000000 becomes '1.0 million', 1200000
     becomes '1.2 million' and '1200000000' becomes '1.2 billion'.  Supports up
@@ -60,8 +71,7 @@ def intword(value, formatting='%.1f'):
     for ordin, power in enumerate(POWERS[1:], 1):
         if value < power:
             chopped = value / float(POWERS[ordin - 1])
-            return (' '.join(
-                [formatting, HUMAN_POWERS[ordin - 1]])) % chopped
+            return (" ".join([formatting, HUMAN_POWERS[ordin - 1]])) % chopped
     return str(value)
 
 
@@ -75,8 +85,9 @@ def apnumber(value):
         return value
     if not 0 < value < 10:
         return str(value)
-    return ('um', 'dois', 'três', 'quatro', 'cinco', 'seis',
-            'sete', 'oito', 'nove')[value - 1]
+    return ("um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove")[
+        value - 1
+    ]
 
 
 def fractional(value):
@@ -107,7 +118,7 @@ def fractional(value):
     if whole_number and not numerator and denominator == 1:
         # this means that an integer was passed in
         # or variants of that integer like 1.0000
-        return '%.0f' % whole_number
+        return "%.0f" % whole_number
     if not whole_number:
-        return '%.0f/%.0f' % (numerator, denominator)
-    return '%.0f %.0f/%.0f' % (whole_number, numerator, denominator)
+        return "%.0f/%.0f" % (numerator, denominator)
+    return "%.0f %.0f/%.0f" % (whole_number, numerator, denominator)
