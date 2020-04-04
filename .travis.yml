@@ -1,29 +1,19 @@
 language: python
 matrix:
   include:
-  - python: '3.5'
-    dist: xenial
-    sudo: false
-  - python: '3.6'
-    dist: xenial
-    env: BUILD_SDIST=true
-    sudo: false
   - python: '3.7'
-    dist: xenial
-    sudo: true
+    sudo: false
+  - python: '3.8'
+    sudo: false
   - python: pypy3
   allow_failures:
     - python: pypy3
 
 cache: pip
 before_install:
-  - chmod +x scripts/run.sh
+  - pip install poetry nox
 
 install:
-  - pip install codecov
+  - poetry install
 
-script:
-   - "./scripts/run.sh"
-
-after_success:
-  - rm tests/coverage.xml && mv tests/.coverage ./ && codecov
+script: nox
