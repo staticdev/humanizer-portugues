@@ -1,13 +1,7 @@
 language: python
-matrix:
-  include:
-  - python: '3.7'
-    sudo: false
-  - python: '3.8'
-    sudo: false
-  - python: pypy3
-  allow_failures:
-    - python: pypy3
+
+python:
+  - "3.7"
 
 cache: pip
 before_install:
