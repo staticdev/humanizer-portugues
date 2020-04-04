@@ -18,10 +18,10 @@ def ordinal(value):
     return "%d%s" % (value, "º")
 
 
-def intcomma(value):
+def int_comma(value):
     """Converts an integer to a string containing commas every three digits.
     For example, 3000 becomes '3,000' and 45000 becomes '45,000'.  To maintain
-    some compatability with Django's intcomma, this function also accepts
+    some compatability with Django's int_comma, this function also accepts
     floats."""
     try:
         if isinstance(value, str):
@@ -34,7 +34,7 @@ def intcomma(value):
     new = re.sub(r"^(-?\d+)(\d{3})", r"\g<1>,\g<2>", orig)
     if orig == new:
         return new
-    return intcomma(new)
+    return int_comma(new)
 
 
 POWERS = [10 ** x for x in (6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 100)]
@@ -53,7 +53,7 @@ HUMAN_POWERS = (
 )
 
 
-def intword(value, formatting="%.1f"):
+def int_word(value, formatting="%.1f"):
     """Converts a large integer to a friendly text representation. Works best for
     numbers over 1 million. For example, 1000000 becomes '1.0 million', 1200000
     becomes '1.2 million' and '1200000000' becomes '1.2 billion'.  Supports up
@@ -75,7 +75,7 @@ def intword(value, formatting="%.1f"):
     return str(value)
 
 
-def apnumber(value):
+def ap_number(value):
     """For numbers 1-9, returns the number spelled out. Otherwise, returns the
     number. This follows Associated Press style.  This always returns a string
     unless the value was not int-able, unlike the Django filter."""

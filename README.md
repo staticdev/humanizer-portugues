@@ -35,19 +35,19 @@ import humanizer_portugues
 Humanization de inteiros:
 
 ```python
-humanizer_portugues.intcomma(12345)
+humanizer_portugues.int_comma(12345)
 '12,345'
 
-humanizer_portugues.intword(123455913)
+humanizer_portugues.int_word(123455913)
 '123.5 milhão'
 
-humanizer_portugues.intword(12345591313)
+humanizer_portugues.int_word(12345591313)
 '12.3 bilhão'
 
-humanizer_portugues.apnumber(4)
+humanizer_portugues.ap_number(4)
 'quatro'
 
-humanizer_portugues.apnumber(41)
+humanizer_portugues.ap_number(41)
 '41'
 ```
 
@@ -55,44 +55,47 @@ Humanization datas e horas:
 
 ```python
 import datetime
-humanizer_portugues.naturalclock(datetime.time(0, 30, 0))
+humanizer_portugues.natural_period(datetime.time(5, 30, 0).hour)
+'manhã'
+
+humanizer_portugues.natural_clock(datetime.time(0, 30, 0))
 'zero hora e trinta minutos'
 
-humanizer_portugues.naturalclock(datetime.time(0, 30, 0), formal=False)
+humanizer_portugues.natural_clock(datetime.time(0, 30, 0), formal=False)
 'meia noite e meia'
 
-humanizer_portugues.naturalday(datetime.datetime.now())
+humanizer_portugues.natural_day(datetime.datetime.now())
 'hoje'
 
-humanizer_portugues.naturaldelta(datetime.timedelta(seconds=1001))
+humanizer_portugues.natural_delta(datetime.timedelta(seconds=1001))
 '16 minutos'
 
-humanizer_portugues.naturalday(datetime.datetime.now() - datetime.timedelta(days=1))
+humanizer_portugues.natural_day(datetime.datetime.now() - datetime.timedelta(days=1))
 'ontem'
 
-humanizer_portugues.naturalday(datetime.date(2007, 6, 5))
+humanizer_portugues.natural_day(datetime.date(2007, 6, 5))
 '5 de junho'
 
-humanizer_portugues.naturaldate(datetime.date(2007, 6, 5))
+humanizer_portugues.natural_date(datetime.date(2007, 6, 5))
 '5 de junho de 2007'
 
-humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=1))
+humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=1))
 'há um segundo'
 
-humanizer_portugues.naturaltime(datetime.datetime.now() - datetime.timedelta(seconds=3600))
+humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=3600))
 'há uma hora'
 ```
 
 Humanization de tamanho de arquivos:
 
 ```python
-humanizer_portugues.naturalsize(1000000)
+humanizer_portugues.natural_size(1000000)
 '1.0 MB'
 
-humanizer_portugues.naturalsize(1000000, binary=True)
+humanizer_portugues.natural_size(1000000, binary=True)
 '976.6 KiB'
 
-humanizer_portugues.naturalsize(1000000, gnu=True)
+humanizer_portugues.natural_size(1000000, gnu=True)
 '976.6K'
 ```
 
@@ -118,12 +121,12 @@ humanizer_portugues.fractional(1)
 Humanization de listas:
 
 ```python
-humanizer_portugues.naturallist(['Cláudio', 'Maria'], ',')
+humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',')
 'Cláudio, Maria'
 
-humanizer_portugues.naturallist(['Cláudio', 'Maria'], ',', 'e')
+humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',', 'e')
 'Cláudio e Maria'
 
-humanizer_portugues.naturallist(['Cláudio', 'Maria', 'José'], ';', 'ou')
+humanizer_portugues.natural_list(['Cláudio', 'Maria', 'José'], ';', 'ou')
 'Cláudio; Maria ou José'
 ```

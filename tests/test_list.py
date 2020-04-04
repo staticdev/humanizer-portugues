@@ -27,4 +27,4 @@ class ListTestCase(HumanizeTestCase):
             "jorbas; maria; gustavo",
             "jorbas; maria ou gustavo",
         )
-        self.assertManyResults(humanizer_portugues.list.naturallist, tests, results)
+        self.assertManyResults(humanizer_portugues.list.natural_list, tests, results)

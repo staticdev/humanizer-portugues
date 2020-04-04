@@ -4,7 +4,7 @@
 """Bits & Bytes related humanization."""
 
 
-def naturalsize(value, binary=False, gnu=False, formatting="%.1f"):
+def natural_size(value, binary=False, gnu=False, formatting="%.1f"):
     """Format a number of byteslike a human readable filesize (eg. 10 kB).  By
     default, decimal suffixes (kB, MB) are used.  Passing binary=true will use
     binary suffixes (KiB, MiB) are used and the base will be 2**10 instead of

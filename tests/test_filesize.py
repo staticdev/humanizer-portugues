@@ -53,4 +53,6 @@ class FilesizeTestCase(HumanizeTestCase):
             "3G",
             "2481.542 YiB",
         )
-        self.assertManyResults(humanizer_portugues.filesize.naturalsize, tests, results)
+        self.assertManyResults(
+            humanizer_portugues.filesize.natural_size, tests, results
+        )

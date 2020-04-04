@@ -75,7 +75,7 @@ class NumberTestCase(HumanizeTestCase):
             None,
         )
         self.assertManyResults(
-            humanizer_portugues.number.intcomma, test_list, result_list
+            humanizer_portugues.number.int_comma, test_list, result_list
         )
 
     def test_intword(self):
@@ -84,7 +84,7 @@ class NumberTestCase(HumanizeTestCase):
             len(humanizer_portugues.number.POWERS),
             len(humanizer_portugues.number.HUMAN_POWERS),
         )
-        # test the result of intword
+        # test the result of int_word
         test_list = (
             "100",
             "1000000",
@@ -116,14 +116,14 @@ class NumberTestCase(HumanizeTestCase):
             "1" + "0" * 101,
         )
         self.assertManyResults(
-            humanizer_portugues.number.intword, test_list, result_list
+            humanizer_portugues.number.int_word, test_list, result_list
         )
 
     def test_apnumber(self):
         test_list = (1, 2, 4, 5, 9, 10, "7", None)
         result_list = ("um", "dois", "quatro", "cinco", "nove", "10", "sete", None)
         self.assertManyResults(
-            humanizer_portugues.number.apnumber, test_list, result_list
+            humanizer_portugues.number.ap_number, test_list, result_list
         )
 
     def test_fractional(self):

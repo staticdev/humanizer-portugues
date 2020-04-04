@@ -3,10 +3,10 @@
 
 """Lists related humanization."""
 
-__all__ = ["naturallist"]
+__all__ = ["natural_list"]
 
 
-def naturallist(itens, separator, conjunction=None):
+def natural_list(itens, separator, conjunction=None):
     """
     Returns human readable list separated by separator
     Optional argument is conjuntion that substitutes the last separator

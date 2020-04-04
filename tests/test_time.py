@@ -52,7 +52,7 @@ class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time"""
 
     def test_naturalclock_formal(self):
-        """Tests naturalclock method"""
+        """Tests natural_clock method"""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
         dez_p_cinco = datetime.time(4, 50, 10)
@@ -78,11 +78,11 @@ class TimeTestCase(HumanizeTestCase):
             overflowtest,
         )
         self.assertManyResults(
-            humanizer_portugues.time.naturalclock, test_list, result_list
+            humanizer_portugues.time.natural_clock, test_list, result_list
         )
 
     def test_naturalclock_informal(self):
-        """Tests naturalclock method with formal=False"""
+        """Tests natural_clock method with formal=False"""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
         dez_p_cinco = datetime.time(4, 50, 10)
@@ -108,14 +108,14 @@ class TimeTestCase(HumanizeTestCase):
             overflowtest,
         )
         self.assertManyResults(
-            lambda d: humanizer_portugues.time.naturalclock(d, formal=False),
+            lambda d: humanizer_portugues.time.natural_clock(d, formal=False),
             test_list,
             result_list,
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
     def test_naturaldelta_nomonths(self, mocked):
-        """Tests naturaldelta method with months=False"""
+        """Tests natural_delta method with months=False"""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -133,14 +133,14 @@ class TimeTestCase(HumanizeTestCase):
             "1 ano e 35 dias",
         ]
         self.assertManyResults(
-            lambda d: humanizer_portugues.time.naturaldelta(d, months=False),
+            lambda d: humanizer_portugues.time.natural_delta(d, months=False),
             test_list,
             result_list,
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
     def test_naturaldelta(self, mocked):
-        """Tests naturaldelta method"""
+        """Tests natural_delta method"""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -209,12 +209,12 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         self.assertManyResults(
-            humanizer_portugues.time.naturaldelta, test_list, result_list
+            humanizer_portugues.time.natural_delta, test_list, result_list
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
     def test_naturaltime(self, mocked):
-        """Tests naturaltime method"""
+        """Tests natural_time method"""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -273,12 +273,12 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         self.assertManyResults(
-            humanizer_portugues.time.naturaltime, test_list, result_list
+            humanizer_portugues.time.natural_time, test_list, result_list
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
     def test_naturaltime_nomonths(self, mocked):
-        """Tests naturaltime method with months=False"""
+        """Tests natural_time method with months=False"""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -341,13 +341,13 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         self.assertManyResults(
-            lambda d: humanizer_portugues.time.naturaltime(d, months=False),
+            lambda d: humanizer_portugues.time.natural_time(d, months=False),
             test_list,
             result_list,
         )
 
     def test_naturalday(self):
-        """Tests naturalday method"""
+        """Tests natural_day method"""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
         if TODAY.month != 3:
@@ -381,11 +381,11 @@ class TimeTestCase(HumanizeTestCase):
             overflowtest,
         )
         self.assertManyResults(
-            humanizer_portugues.time.naturalday, test_list, result_list
+            humanizer_portugues.time.natural_day, test_list, result_list
         )
 
     def test_naturaldate(self):
-        """Tests naturaldate method"""
+        """Tests natural_date method"""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
 
@@ -421,11 +421,11 @@ class TimeTestCase(HumanizeTestCase):
             overflowtest,
         )
         self.assertManyResults(
-            humanizer_portugues.time.naturaldate, test_list, result_list
+            humanizer_portugues.time.natural_date, test_list, result_list
         )
 
     def test_naturalyear(self):
-        """Tests naturalyear method"""
+        """Tests natural_year method"""
         next_year = TODAY + ONE_YEAR
         last_year = TODAY - ONE_YEAR
 
@@ -455,5 +455,5 @@ class TimeTestCase(HumanizeTestCase):
             overflowtest,
         )
         self.assertManyResults(
-            humanizer_portugues.time.naturalyear, test_list, result_list
+            humanizer_portugues.time.natural_year, test_list, result_list
         )

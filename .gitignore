@@ -130,3 +130,6 @@ dmypy.json
 
 # Pytype
 .pytype/
+
+# PyCharm
+.idea/
