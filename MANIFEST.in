@@ -1,4 +1,0 @@
-include *.md
-include LICENCE
-global-exclude __pycache__
-global-exclude *.py[co]
