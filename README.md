@@ -1,5 +1,6 @@
 # humanizer-portugues
 
+[![Tests](https://github.com/staticdev/humanizer-portugues/workflows/Tests/badge.svg)](https://github.com/staticdev/humanizer-portugues/actions?workflow=Tests)
 ![Travis](https://api.travis-ci.org/staticdev/humanizer-portugues.svg?branch=master)
 [![Codecov](https://codecov.io/gh/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)](https://codecov.io/gh/staticdev/humanizer-portugues)
 ![PyPi](https://badge.fury.io/py/humanizer-portugues.svg)
