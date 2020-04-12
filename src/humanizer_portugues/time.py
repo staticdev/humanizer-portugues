@@ -235,9 +235,8 @@ def _less_than_a_day(seconds):
         return "%d minutos" % minutes
     if 3600 <= seconds < 3600 * 2:
         return "uma hora"
-    if seconds > 3600:
-        hours = seconds // 3600
-        return "%d horas" % hours
+    hours = seconds // 3600
+    return "%d horas" % hours
 
 
 def _less_than_a_year(days, months, use_months):
