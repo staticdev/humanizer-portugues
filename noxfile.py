@@ -5,6 +5,7 @@ from typing import Any
 import nox
 from nox.sessions import Session
 
+package = "humanizer_portugues"
 nox.options.sessions = "lint", "safety", "mypy", "tests"
 locations = "src", "tests", "noxfile.py"
 
@@ -89,6 +90,15 @@ def tests(session: Session) -> None:
     session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(session, "coverage[toml]", "pytest", "pytest-cov")
     session.run("pytest", *args)
+
+
+@nox.session(python=["3.8", "3.7"])
+def typeguard(session: Session) -> None:
+    """Runtime type checking using Typeguard."""
+    args = session.posargs or ["-m", "not e2e"]
+    session.run("poetry", "install", "--no-dev", external=True)
+    install_with_constraints(session, "pytest", "typeguard")
+    session.run("pytest", f"--typeguard-packages={package}", *args)
 
 
 @nox.session(python="3.8")

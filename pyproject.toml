@@ -33,6 +33,7 @@ mypy = "^0.770"
 pytest = "^5.4.1"
 coverage = {extras = ["toml"], version = "^5.0.4"}
 pytest-cov = "^2.8.1"
+typeguard = "^2.7.1"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
