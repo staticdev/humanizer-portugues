@@ -4,6 +4,7 @@
 [![Codecov](https://codecov.io/gh/staticdev/humanizer-portugues/badge.svg?branch=master&service=github)](https://codecov.io/gh/staticdev/humanizer-portugues)
 ![PyPi](https://badge.fury.io/py/humanizer-portugues.svg)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 Este pacote contém várias funções de humanização (humanization), como
 transformar um número em uma duração legível para humanos ('três minutos
