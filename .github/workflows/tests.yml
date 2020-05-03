@@ -6,14 +6,33 @@ jobs:
       matrix:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
         python-version: ["3.7", "3.8"]
-    runs-on: ${{ matrix.os }}
     name: Python ${{ matrix.python-version }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: actions/setup-python@v1.2.0
-        with:
-          python-version: ${{ matrix.python-version }}
-      - run: |
+      - name: Install tools using pip
+        run: |
           pip install --constraint=.github/workflows/constraints.txt pip
-          pip install --constraint=.github/workflows/constraints.txt nox poetry
-      - run: nox --force-color
+          pip install --constraint=.github/workflows/constraints.txt cookiecutter nox poetry pre-commit
+      - name: Create git repository
+        if: matrix.os != 'windows-latest'
+        run: |
+          git init
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          git add .
+          git commit --message="Initial import"
+      - name: Create git repository (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          git init
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          $ErrorActionPreference = "Continue"
+          git add .
+          $ErrorActionPreference = "Stop"
+          git add --renormalize .
+          git commit --message="Initial import"
+      - name: Run test suite using Nox
+        run: nox --force-color
