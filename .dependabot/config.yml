@@ -12,3 +12,9 @@ update_configs:
     allowed_updates:
       - match:
           update_type: "all"
+  - package_manager: "github_actions"
+    directory: "/.github/workflows"
+    update_schedule: "daily"
+    allowed_updates:
+      - match:
+          update_type: "all"
