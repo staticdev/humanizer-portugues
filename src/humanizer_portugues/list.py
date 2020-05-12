@@ -1,27 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Lists related humanization."""
+from typing import List
 
 __all__ = ["natural_list"]
 
 
-def natural_list(itens, separator, conjunction=None):
+def natural_list(items: List, separator: str, conjunction: str = None) -> str:
+    """Returns human readable list separated by separator.
+
+    Optional argument is conjuntion that substitutes the last separator.
+
+    Args:
+        items (List): list of items.
+        separator (str): separator of items.
+        conjunction (str): word/string as last separator. Defaults to None.
+
+    Returns:
+        str: list in natural language.
     """
-    Returns human readable list separated by separator
-    Optional argument is conjuntion that substitutes the last separator
-    """
-    len_itens = len(itens)
-    if len_itens == 0:
+    len_items = len(items)
+    if len_items == 0:
         return ""
-    if len_itens == 1:
-        return itens[0]
-    phrase = itens[0]
+    if len_items == 1:
+        return items[0]
+    phrase = items[0]
     if conjunction:
-        for i in range(1, len_itens - 1):
-            phrase += "%s %s" % (separator, itens[i])
-        phrase += " %s %s" % (conjunction, itens[len_itens - 1])
+        for i in range(1, len_items - 1):
+            phrase += "%s %s" % (separator, items[i])
+        phrase += " %s %s" % (conjunction, items[len_items - 1])
     else:
-        for i in range(1, len_itens):
-            phrase += "%s %s" % (separator, itens[i])
+        for i in range(1, len_items):
+            phrase += "%s %s" % (separator, items[i])
     return phrase

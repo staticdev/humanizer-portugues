@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Tests for time humanizing."""
-
 import datetime
 import unittest.mock
 
@@ -15,25 +13,26 @@ ONE_YEAR = datetime.timedelta(days=365)
 
 
 class FakeDate:
-    """Test helper to fake date"""
+    """Test helper to fake date."""
 
     def __init__(self, year, month, day):
+        """Initializes fake date."""
         self.year, self.month, self.day = year, month, day
 
 
 class FakeTime:
-    """Test helper class to fake time"""
+    """Test helper class to fake time."""
 
     def __init__(self, hour, minute, second):
+        """Initializes fake time."""
         self.hour, self.minute, self.second = hour, minute, second
 
 
 class TimeUtilitiesTestCase(HumanizeTestCase):
-    """These are not considered "public" interfaces, but require tests anyway.
-    """
+    """These are not considered "public" interfaces, but require tests anyway."""
 
     def test_date_and_delta(self):
-        """Tests date_and_delta utility method"""
+        """Tests date_and_delta utility method."""
         now = datetime.datetime.now()
         tdelta = datetime.timedelta
         int_tests = (3, 29, 86399, 86400, 86401 * 30)
@@ -49,10 +48,10 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
 
 
 class TimeTestCase(HumanizeTestCase):
-    """Tests for the public interface of humanize.time"""
+    """Tests for the public interface of humanize.time."""
 
-    def test_naturalclock_formal(self):
-        """Tests natural_clock method"""
+    def test_natural_clock_formal(self):
+        """Tests natural_clock method."""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
         dez_p_cinco = datetime.time(4, 50, 10)
@@ -81,8 +80,8 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_clock, test_list, result_list
         )
 
-    def test_naturalclock_informal(self):
-        """Tests natural_clock method with formal=False"""
+    def test_natural_clock_informal(self):
+        """Tests natural_clock method with formal=False."""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
         dez_p_cinco = datetime.time(4, 50, 10)
@@ -114,8 +113,8 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_naturaldelta_nomonths(self, mocked):
-        """Tests natural_delta method with months=False"""
+    def test_natural_delta_nomonths(self, mocked):
+        """Tests natural_delta method with use_months=False."""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -133,14 +132,14 @@ class TimeTestCase(HumanizeTestCase):
             "1 ano e 35 dias",
         ]
         self.assertManyResults(
-            lambda d: humanizer_portugues.time.natural_delta(d, months=False),
+            lambda d: humanizer_portugues.time.natural_delta(d, use_months=False),
             test_list,
             result_list,
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_naturaldelta(self, mocked):
-        """Tests natural_delta method"""
+    def test_natural_delta(self, mocked):
+        """Tests natural_delta method."""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -213,8 +212,8 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_naturaltime(self, mocked):
-        """Tests natural_time method"""
+    def test_natural_time(self, mocked):
+        """Tests natural_time method."""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -277,8 +276,8 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_naturaltime_nomonths(self, mocked):
-        """Tests natural_time method with months=False"""
+    def test_natural_time_nomonths(self, mocked):
+        """Tests natural_time method with use_months=False."""
         now = datetime.datetime.now()
         mocked.return_value = now
         test_list = [
@@ -341,13 +340,13 @@ class TimeTestCase(HumanizeTestCase):
             "NaN",
         ]
         self.assertManyResults(
-            lambda d: humanizer_portugues.time.natural_time(d, months=False),
+            lambda d: humanizer_portugues.time.natural_time(d, use_months=False),
             test_list,
             result_list,
         )
 
-    def test_naturalday(self):
-        """Tests natural_day method"""
+    def test_natural_day(self):
+        """Tests natural_day method."""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
         if TODAY.month != 3:
@@ -384,8 +383,8 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_day, test_list, result_list
         )
 
-    def test_naturaldate(self):
-        """Tests natural_date method"""
+    def test_natural_date(self):
+        """Tests natural_date method."""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
 
@@ -424,8 +423,8 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_date, test_list, result_list
         )
 
-    def test_naturalyear(self):
-        """Tests natural_year method"""
+    def test_natural_year(self):
+        """Tests natural_year method."""
         next_year = TODAY + ONE_YEAR
         last_year = TODAY - ONE_YEAR
 
