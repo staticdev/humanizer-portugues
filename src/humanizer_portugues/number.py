@@ -1,28 +1,44 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Humanizing functions for numbers."""
-
-from fractions import Fraction
+import fractions
 import re
+from typing import Union
 
 
-def ordinal(value):
-    """Converts an integer to its ordinal as a string. 1 is '1º', 2 is '2º',
-    3 is '3º', etc. Works for any integer or anything int() will turn into an
-    integer.  Anything other value will have nothing done to it."""
+def ordinal(value: int) -> Union[str, int]:
+    """Converts an integer to its ordinal as a string.
+
+    1 is '1º', 2 is '2º', 3 is '3º', etc.
+    Works for any integer or anything int() will turn into an integer.
+    Anything other value will have nothing done to it.
+
+    Args:
+        value: integer.
+
+    Returns:
+        str: ordinal string.
+    """
     try:
         value = int(value)
     except (TypeError, ValueError):
         return value
-    return "%d%s" % (value, "º")
+    return "{}{}".format(value, "º")
 
 
-def int_comma(value):
+def int_comma(value: Union[str, int]) -> Union[str, int]:
     """Converts an integer to a string containing commas every three digits.
+
     For example, 3000 becomes '3,000' and 45000 becomes '45,000'.  To maintain
     some compatability with Django's int_comma, this function also accepts
-    floats."""
+    floats.
+
+    Args:
+        value (int): any number.
+
+    Returns:
+        str: formatted number with commas.
+    """
     try:
         if isinstance(value, str):
             float(value.replace(",", ""))
@@ -53,14 +69,25 @@ HUMAN_POWERS = (
 )
 
 
-def int_word(value, formatting="%.1f"):
-    """Converts a large integer to a friendly text representation. Works best for
-    numbers over 1 million. For example, 1000000 becomes '1.0 million', 1200000
-    becomes '1.2 million' and '1200000000' becomes '1.2 billion'.  Supports up
-    to decillion (33 digits) and googol (100 digits).  You can pass format to
-    change the number of decimal or general format of the number portion.
+def int_word(value: int, formatting: str = "%.1f") -> Union[str, int]:
+    """Converts a large integer to a friendly text representation.
+
+    Works best for numbers over 1 million.
+    For example, 1000000 becomes '1.0 million', 1200000 becomes
+    '1.2 million' and '1200000000' becomes '1.2 billion'.
+    Supports up to decillion (33 digits) and googol (100 digits).
+    You can pass format to change the number of decimal or general
+    format of the number portion.
     This function returns a string unless the value passed was unable to be
-    coaxed into an int."""
+    coaxed into an int.
+
+    Args:
+        value (int): any number.
+        formatting (str): string formatting pattern. Defaults to "%.1f":str.
+
+    Returns:
+        str: number formatted with scale words.
+    """
     try:
         value = int(value)
     except (TypeError, ValueError):
@@ -75,10 +102,18 @@ def int_word(value, formatting="%.1f"):
     return str(value)
 
 
-def ap_number(value):
-    """For numbers 1-9, returns the number spelled out. Otherwise, returns the
-    number. This follows Associated Press style.  This always returns a string
-    unless the value was not int-able, unlike the Django filter."""
+def ap_number(value: int) -> Union[str, int]:
+    """For numbers 1-9, returns the number spelled out. Otherwise, returns the number.
+
+    This follows Associated Press style.  This always returns a string
+    unless the value was not int-able, unlike the Django filter.
+
+    Args:
+        value (int): any number.
+
+    Returns:
+        str: spelled 1-9 numbers or original number.
+    """
     try:
         value = int(value)
     except (TypeError, ValueError):
@@ -90,29 +125,38 @@ def ap_number(value):
     ]
 
 
-def fractional(value):
-    """
-    There will be some cases where one might not want to show
-        ugly decimal places for floats and decimals.
-    This function returns a human readable fractional number
-        in form of fractions and mixed fractions.
+def fractional(value: float) -> Union[str, float]:
+    """Returns a human readable fractional number.
+
+    The return can be in the form of fractions and mixed fractions.
+    There will be some cases where one might not want to show ugly decimal
+    places for floats and decimals.
+
     Pass in a string, or a number or a float, and this function returns
         a string representation of a fraction
         or whole number
         or a mixed fraction
+
     Examples:
         fractional(0.3) will return '1/3'
         fractional(1.3) will return '1 3/10'
         fractional(float(1/3)) will return '1/3'
         fractional(1) will return '1'
+
     This will always return a string.
+
+    Args:
+        value (float): a number.
+
+    Returns:
+        str: human readable number.
     """
     try:
         number = float(value)
     except (TypeError, ValueError):
         return value
     whole_number = int(number)
-    frac = Fraction(number - whole_number).limit_denominator(1000)
+    frac = fractions.Fraction(number - whole_number).limit_denominator(1000)
     numerator = frac.numerator
     denominator = frac.denominator
     if whole_number and not numerator and denominator == 1:

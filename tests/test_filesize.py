@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Tests for filesize humanizing."""
-
 import humanizer_portugues.filesize
 from .base import HumanizeTestCase
 
 
 class FilesizeTestCase(HumanizeTestCase):
-    def test_naturalsize(self):
+    """Test case class for file size."""
+
+    def test_natural_size(self):
+        """Tests natural_size method."""
         tests = (
             1,
             300,
