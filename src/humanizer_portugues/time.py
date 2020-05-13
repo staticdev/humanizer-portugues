@@ -7,7 +7,6 @@ These are largely borrowed from Django's ``contrib.humanize``.
 import datetime
 from typing import Any
 from typing import Tuple
-from typing import Union
 
 __all__ = [
     "natural_clock",
@@ -168,20 +167,18 @@ def _informal_time(value, hour):
     return clock
 
 
-def natural_clock(
-    value: datetime.datetime, formal: bool = True
-) -> Union[str, datetime.datetime]:
+def natural_clock(value: Any, formal: bool = True) -> Any:
     """Returns human-readable time.
 
     Compares time values to present time returns representing readable of time
     with the given day period.
 
     Args:
-        value (datetime.datetime): any datetime.
+        value (Any): any datetime.
         formal (bool): Formal or informal reading. Defaults to True.
 
     Returns:
-        str: readable time.
+        Any: readable time or original object.
     """
     try:
         time = datetime.time(value.hour, value.minute, value.second)
@@ -222,19 +219,17 @@ def abs_timedelta(delta: datetime.timedelta) -> datetime.timedelta:
     return delta
 
 
-def date_and_delta(
-    value: Union[datetime.datetime, datetime.timedelta, int]
-) -> Tuple[Any, Any]:
+def date_and_delta(value: Any) -> Tuple[Any, Any]:
     """Returns date and timedelta.
 
     Turn a value into a date and a timedelta which represents how long ago
     it was. If that's not possible, return (None, value).
 
     Args:
-        value (Union[datetime.datetime, datetime.timedelta, int]): date value.
+        value (Any): date value.
 
     Returns:
-        [type]: [description]
+        Tuple[Any, Any]: date and delta or tuple of None, original value.
     """
     now = _now()
     if isinstance(value, datetime.datetime):
@@ -297,13 +292,11 @@ def _one_year(days, months, use_months):
     return "1 ano e %d dias" % days
 
 
-def more_than_one_year(years):
+def more_than_one_year(years: int) -> str:
     return "%d anos" % years
 
 
-def natural_delta(
-    value: datetime.datetime, use_months: bool = True
-) -> Union[str, datetime.datetime]:
+def natural_delta(value: Any, use_months: bool = True) -> Any:
     """Returns human-readable time difference.
 
     Given a timedelta or a number of seconds, return a natural
@@ -313,11 +306,11 @@ def natural_delta(
     for fuzziness between years.
 
     Args:
-        value (datetime.datetime): date.
+        value (Any): date.
         use_months (bool): show the number of months. Defaults to True.
 
     Returns:
-        str: time representation in natural language.
+        Any: time representation in natural language or original object.
     """
     date, delta = date_and_delta(value)
     if date is None:
@@ -338,9 +331,7 @@ def natural_delta(
     return more_than_one_year(years)
 
 
-def natural_time(
-    value: datetime.datetime, future: bool = False, use_months: bool = True
-) -> Union[str, datetime.datetime]:
+def natural_time(value: Any, future: bool = False, use_months: bool = True) -> Any:
     """Returns human-readable time.
 
     Given a datetime or a number of seconds, return a natural representation
@@ -351,12 +342,12 @@ def natural_time(
     unless ``future`` is set to True.
 
     Args:
-        value (datetime.datetime): time value.
+        value (Any): time value.
         future (bool): if false uses past tense. Defaults to False.
         use_months (bool): if true return number of months. Defaults to True.
 
     Returns:
-        Union[str, datetime.datetime]: time in natural language.
+        Any: time in natural language or original object.
     """
     now = _now()
     date, delta = date_and_delta(value)
@@ -375,9 +366,7 @@ def natural_time(
     return ago % delta
 
 
-def natural_day(
-    value: Union[datetime.datetime, datetime.date], has_year: bool = False
-) -> Union[str, datetime.datetime, datetime.date]:
+def natural_day(value: Any, has_year: bool = False) -> Any:
     """Returns human-readable day.
 
     For date values that are tomorrow, today or yesterday compared to
@@ -385,11 +374,11 @@ def natural_day(
     formatted according to ``format``.
 
     Args:
-        value (Union[datetime.datetime, datetime.date]): a date.
+        value (Any): a date.
         has_year (bool): if year is added. Defaults to False.
 
     Returns:
-        Union[str, datetime.datetime]: date formatted in natural language.
+        Any: date formatted in natural language or original object.
     """
     try:
         date = datetime.date(value.year, value.month, value.day)
