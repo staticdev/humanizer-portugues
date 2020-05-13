@@ -3,10 +3,10 @@
 """Humanizing functions for numbers."""
 import fractions
 import re
-from typing import Union
+from typing import Any
 
 
-def ordinal(value: int) -> Union[str, int]:
+def ordinal(value: Any) -> Any:
     """Converts an integer to its ordinal as a string.
 
     1 is '1º', 2 is '2º', 3 is '3º', etc.
@@ -17,7 +17,7 @@ def ordinal(value: int) -> Union[str, int]:
         value: integer.
 
     Returns:
-        str: ordinal string.
+        Any: ordinal string.
     """
     try:
         value = int(value)
@@ -26,7 +26,7 @@ def ordinal(value: int) -> Union[str, int]:
     return "{}{}".format(value, "º")
 
 
-def int_comma(value: Union[str, int]) -> Union[str, int]:
+def int_comma(value: Any) -> Any:
     """Converts an integer to a string containing commas every three digits.
 
     For example, 3000 becomes '3,000' and 45000 becomes '45,000'.  To maintain
@@ -34,10 +34,10 @@ def int_comma(value: Union[str, int]) -> Union[str, int]:
     floats.
 
     Args:
-        value (int): any number.
+        value: any number.
 
     Returns:
-        str: formatted number with commas.
+        Any: formatted number with commas.
     """
     try:
         if isinstance(value, str):
@@ -69,7 +69,7 @@ HUMAN_POWERS = (
 )
 
 
-def int_word(value: int, formatting: str = "%.1f") -> Union[str, int]:
+def int_word(value: Any, formatting: str = "%.1f") -> Any:
     """Converts a large integer to a friendly text representation.
 
     Works best for numbers over 1 million.
@@ -82,11 +82,11 @@ def int_word(value: int, formatting: str = "%.1f") -> Union[str, int]:
     coaxed into an int.
 
     Args:
-        value (int): any number.
+        value: any number.
         formatting (str): string formatting pattern. Defaults to "%.1f":str.
 
     Returns:
-        str: number formatted with scale words.
+        Any: number formatted with scale words.
     """
     try:
         value = int(value)
@@ -102,17 +102,17 @@ def int_word(value: int, formatting: str = "%.1f") -> Union[str, int]:
     return str(value)
 
 
-def ap_number(value: int) -> Union[str, int]:
+def ap_number(value: Any) -> Any:
     """For numbers 1-9, returns the number spelled out. Otherwise, returns the number.
 
     This follows Associated Press style.  This always returns a string
     unless the value was not int-able, unlike the Django filter.
 
     Args:
-        value (int): any number.
+        value: any number.
 
     Returns:
-        str: spelled 1-9 numbers or original number.
+        Any: spelled 1-9 numbers or original number.
     """
     try:
         value = int(value)
@@ -125,7 +125,7 @@ def ap_number(value: int) -> Union[str, int]:
     ]
 
 
-def fractional(value: float) -> Union[str, float]:
+def fractional(value: Any) -> Any:
     """Returns a human readable fractional number.
 
     The return can be in the form of fractions and mixed fractions.
@@ -146,10 +146,10 @@ def fractional(value: float) -> Union[str, float]:
     This will always return a string.
 
     Args:
-        value (float): a number.
+        value: a number.
 
     Returns:
-        str: human readable number.
+        Any: human readable number.
     """
     try:
         number = float(value)
