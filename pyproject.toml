@@ -31,7 +31,6 @@ safety = "^1.9.0"
 mypy = "^0.770"
 pytest = "^5.4.2"
 coverage = {extras = ["toml"], version = "^5.0.4"}
-pytest-cov = "^2.8.1"
 typeguard = "^2.7.1"
 pre-commit = "^2.4.0"
 
