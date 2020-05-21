@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "humanizer-portugues"
-version = "2.3.0"
+version = "2.3.1"
 description = "Humanize functions for Portuguese."
 authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
 license = "MIT"
