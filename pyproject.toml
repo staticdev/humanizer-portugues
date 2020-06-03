@@ -31,7 +31,7 @@ safety = "^1.9.0"
 mypy = "^0.770"
 pytest = "^5.4.2"
 coverage = {extras = ["toml"], version = "^5.0.4"}
-typeguard = "^2.7.1"
+typeguard = "^2.8.0"
 pre-commit = "^2.4.0"
 
 [tool.coverage.paths]
