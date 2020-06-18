@@ -1,4 +1,4 @@
-# humanizer-portugues
+# Humanizer Português
 
 [![Tests](https://github.com/staticdev/humanizer-portugues/workflows/Tests/badge.svg)](https://github.com/staticdev/humanizer-portugues/actions?workflow=Tests)
 [![Supported Python Versions](https://img.shields.io/pypi/pyversions/humanizer-portugues.svg)](https://pypi.python.org/pypi/humanizer-portugues)
