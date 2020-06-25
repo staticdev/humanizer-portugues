@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Tests base classes."""
+import datetime
+from typing import Any
 from typing import Callable
 from typing import List
 from typing import Tuple
@@ -12,8 +14,11 @@ class HumanizeTestCase(TestCase):
     """Parent test case class for this package."""
 
     def assertManyResults(
-        self, function: Callable, args: Union[List, Tuple], results: Union[List, Tuple]
-    ):
+        self,
+        function: Callable[[Any], str],
+        args: Union[List[Any], Tuple[Any]],
+        results: Union[List[str], Tuple[str]],
+    ) -> None:
         """Utility method for multiple assertions.
 
         Goes through a list of arguments and makes sure that function called
@@ -31,11 +36,15 @@ class HumanizeTestCase(TestCase):
             else:
                 self.assertEqual(function(arg), result)
 
-    def assertEqualDatetime(self, dt1, dt2):
+    def assertEqualDatetime(
+        self, dt1: datetime.datetime, dt2: datetime.datetime
+    ) -> None:
         """Utility method for comparing datetimes."""
         self.assertEqual((dt1 - dt2).seconds, 0)
 
-    def assertEqualTimedelta(self, td1, td2):
+    def assertEqualTimedelta(
+        self, td1: datetime.timedelta, td2: datetime.timedelta
+    ) -> None:
         """Utility method for comparing timedeltas."""
         self.assertEqual(td1.days, td2.days)
         self.assertEqual(td1.seconds, td2.seconds)

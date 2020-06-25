@@ -15,7 +15,7 @@ ONE_YEAR = datetime.timedelta(days=365)
 class FakeDate:
     """Test helper to fake date."""
 
-    def __init__(self, year, month, day):
+    def __init__(self, year: int, month: int, day: int) -> None:
         """Initializes fake date."""
         self.year, self.month, self.day = year, month, day
 
@@ -23,7 +23,7 @@ class FakeDate:
 class FakeTime:
     """Test helper class to fake time."""
 
-    def __init__(self, hour, minute, second):
+    def __init__(self, hour: int, minute: int, second: int) -> None:
         """Initializes fake time."""
         self.hour, self.minute, self.second = hour, minute, second
 
@@ -31,7 +31,7 @@ class FakeTime:
 class TimeUtilitiesTestCase(HumanizeTestCase):
     """These are not considered "public" interfaces, but require tests anyway."""
 
-    def test_date_and_delta(self):
+    def test_date_and_delta(self) -> None:
         """Tests date_and_delta utility method."""
         now = datetime.datetime.now()
         tdelta = datetime.timedelta
@@ -50,7 +50,7 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
 class TimeTestCase(HumanizeTestCase):
     """Tests for the public interface of humanize.time."""
 
-    def test_natural_clock_formal(self):
+    def test_natural_clock_formal(self) -> None:
         """Tests natural_clock method."""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
@@ -80,7 +80,7 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_clock, test_list, result_list
         )
 
-    def test_natural_clock_informal(self):
+    def test_natural_clock_informal(self) -> None:
         """Tests natural_clock method with formal=False."""
         meia_noite_meia = datetime.time(0, 30, 0)
         treze_um = datetime.time(13, 1, 0)
@@ -113,7 +113,7 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_natural_delta_nomonths(self, mocked):
+    def test_natural_delta_nomonths(self, mocked: int) -> None:
         """Tests natural_delta method with use_months=False."""
         now = datetime.datetime.now()
         mocked.return_value = now
@@ -138,7 +138,7 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_natural_delta(self, mocked):
+    def test_natural_delta(self, mocked: int) -> None:
         """Tests natural_delta method."""
         now = datetime.datetime.now()
         mocked.return_value = now
@@ -212,7 +212,7 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_natural_time(self, mocked):
+    def test_natural_time(self, mocked: int) -> None:
         """Tests natural_time method."""
         now = datetime.datetime.now()
         mocked.return_value = now
@@ -276,7 +276,7 @@ class TimeTestCase(HumanizeTestCase):
         )
 
     @unittest.mock.patch("humanizer_portugues.time._now")
-    def test_natural_time_nomonths(self, mocked):
+    def test_natural_time_nomonths(self, mocked: int) -> None:
         """Tests natural_time method with use_months=False."""
         now = datetime.datetime.now()
         mocked.return_value = now
@@ -345,7 +345,7 @@ class TimeTestCase(HumanizeTestCase):
             result_list,
         )
 
-    def test_natural_day(self):
+    def test_natural_day(self) -> None:
         """Tests natural_day method."""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
@@ -383,7 +383,7 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_day, test_list, result_list
         )
 
-    def test_natural_date(self):
+    def test_natural_date(self) -> None:
         """Tests natural_date method."""
         tomorrow = TODAY + ONE_DAY
         yesterday = TODAY - ONE_DAY
@@ -423,7 +423,7 @@ class TimeTestCase(HumanizeTestCase):
             humanizer_portugues.time.natural_date, test_list, result_list
         )
 
-    def test_natural_year(self):
+    def test_natural_year(self) -> None:
         """Tests natural_year method."""
         next_year = TODAY + ONE_YEAR
         last_year = TODAY - ONE_YEAR
