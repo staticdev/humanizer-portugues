@@ -8,9 +8,9 @@ from .base import HumanizeTestCase
 class NumberTestCase(HumanizeTestCase):
     """Test case class for numbers."""
 
-    def test_ordinal(self):
+    def test_ordinal(self) -> None:
         """Tests ordinal method."""
-        test_list = (
+        test_list = [
             "1",
             "2",
             "3",
@@ -24,8 +24,8 @@ class NumberTestCase(HumanizeTestCase):
             "111",
             "something else",
             None,
-        )
-        result_list = (
+        ]
+        result_list = [
             "1º",
             "2º",
             "3º",
@@ -39,14 +39,14 @@ class NumberTestCase(HumanizeTestCase):
             "111º",
             "something else",
             None,
-        )
+        ]
         self.assertManyResults(
             humanizer_portugues.number.ordinal, test_list, result_list
         )
 
-    def test_int_comma(self):
+    def test_int_comma(self) -> None:
         """Tests int_comma method."""
-        test_list = (
+        test_list = [
             100,
             1000,
             10123,
@@ -60,8 +60,8 @@ class NumberTestCase(HumanizeTestCase):
             "1000000",
             "1234567.1234567",
             None,
-        )
-        result_list = (
+        ]
+        result_list = [
             "100",
             "1,000",
             "10,123",
@@ -75,12 +75,12 @@ class NumberTestCase(HumanizeTestCase):
             "1,000,000",
             "1,234,567.1234567",
             None,
-        )
+        ]
         self.assertManyResults(
             humanizer_portugues.number.int_comma, test_list, result_list
         )
 
-    def test_int_word(self):
+    def test_int_word(self) -> None:
         """Tests int_word method."""
         # make sure that POWERS & HUMAN_POWERS have the same number of items
         self.assertEqual(
@@ -88,7 +88,7 @@ class NumberTestCase(HumanizeTestCase):
             len(humanizer_portugues.number.HUMAN_POWERS),
         )
         # test the result of int_word
-        test_list = (
+        test_list = [
             "100",
             "1000000",
             "1200000",
@@ -102,8 +102,8 @@ class NumberTestCase(HumanizeTestCase):
             None,
             ("1230000", "%0.2f"),
             10 ** 101,
-        )
-        result_list = (
+        ]
+        result_list = [
             "100",
             "1.0 milhão",
             "1.2 milhão",
@@ -117,23 +117,23 @@ class NumberTestCase(HumanizeTestCase):
             None,
             "1.23 milhão",
             "1" + "0" * 101,
-        )
+        ]
         self.assertManyResults(
             humanizer_portugues.number.int_word, test_list, result_list
         )
 
-    def test_ap_number(self):
+    def test_ap_number(self) -> None:
         """Tests ap_number method."""
-        test_list = (1, 2, 4, 5, 9, 10, "7", None)
-        result_list = ("um", "dois", "quatro", "cinco", "nove", "10", "sete", None)
+        test_list = [1, 2, 4, 5, 9, 10, "7", None]
+        result_list = ["um", "dois", "quatro", "cinco", "nove", "10", "sete", None]
         self.assertManyResults(
             humanizer_portugues.number.ap_number, test_list, result_list
         )
 
-    def test_fractional(self):
+    def test_fractional(self) -> None:
         """Tests fractional method."""
-        test_list = (1, 2.0, (4.0 / 3.0), (5.0 / 6.0), "7", "8.9", "dez", None)
-        result_list = ("1", "2", "1 1/3", "5/6", "7", "8 9/10", "dez", None)
+        test_list = [1, 2.0, (4.0 / 3.0), (5.0 / 6.0), "7", "8.9", "dez", None]
+        result_list = ["1", "2", "1 1/3", "5/6", "7", "8 9/10", "dez", None]
         self.assertManyResults(
             humanizer_portugues.number.fractional, test_list, result_list
         )

@@ -5,8 +5,6 @@ import datetime
 from typing import Any
 from typing import Callable
 from typing import List
-from typing import Tuple
-from typing import Union
 from unittest import TestCase
 
 
@@ -14,10 +12,7 @@ class HumanizeTestCase(TestCase):
     """Parent test case class for this package."""
 
     def assertManyResults(
-        self,
-        function: Callable[[Any], str],
-        args: Union[List[Any], Tuple[Any]],
-        results: Union[List[str], Tuple[str]],
+        self, function: Callable[..., Any], args: List[Any], results: List[Any],
     ) -> None:
         """Utility method for multiple assertions.
 

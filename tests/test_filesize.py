@@ -8,9 +8,9 @@ from .base import HumanizeTestCase
 class FilesizeTestCase(HumanizeTestCase):
     """Test case class for file size."""
 
-    def test_natural_size(self):
+    def test_natural_size(self) -> None:
         """Tests natural_size method."""
-        tests = (
+        tests = [
             1,
             300,
             3000,
@@ -31,8 +31,8 @@ class FilesizeTestCase(HumanizeTestCase):
             (3000, False, True, "%.3f"),
             (3000000000, False, True, "%.0f"),
             (10 ** 26 * 30, True, False, "%.3f"),
-        )
-        results = (
+        ]
+        results = [
             "1 Byte",
             "300 Bytes",
             "3.0 kB",
@@ -53,7 +53,7 @@ class FilesizeTestCase(HumanizeTestCase):
             "2.930K",
             "3G",
             "2481.542 YiB",
-        )
+        ]
         self.assertManyResults(
             humanizer_portugues.filesize.natural_size, tests, results
         )
