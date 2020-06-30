@@ -122,11 +122,11 @@ MINUTES = {
 }
 
 
-def _now():
+def _now() -> datetime.datetime:
     return datetime.datetime.now()
 
 
-def natural_period(hour):
+def natural_period(hour: int) -> str:
     """Given current hour, returns period of the day."""
     if 0 < hour < 12:
         return "manhã"
@@ -137,7 +137,7 @@ def natural_period(hour):
     return ""
 
 
-def _formal_time(value, hour):
+def _formal_time(value: datetime.time, hour: int) -> str:
     clock = HOURS[hour]
     if hour in [0, 1]:
         clock += " hora"
@@ -152,7 +152,7 @@ def _formal_time(value, hour):
     return clock
 
 
-def _informal_time(value, hour):
+def _informal_time(value: datetime.time, hour: int) -> str:
     clock = HOURS[hour]
     if hour == 0:
         clock = "meia noite"
@@ -248,7 +248,7 @@ def date_and_delta(value: Any) -> Tuple[Any, Any]:
     return date, abs_timedelta(delta)
 
 
-def _less_than_a_day(seconds):
+def _less_than_a_day(seconds: int) -> str:
     if seconds == 0:
         return "um momento"
     if seconds == 1:
@@ -266,7 +266,7 @@ def _less_than_a_day(seconds):
     return "%d horas" % hours
 
 
-def _less_than_a_year(days, months, use_months):
+def _less_than_a_year(days: int, months: int, use_months: bool) -> str:
     if days == 1:
         return "um dia"
     if not use_months:
@@ -278,7 +278,7 @@ def _less_than_a_year(days, months, use_months):
     return "%d meses" % months
 
 
-def _one_year(days, months, use_months):
+def _one_year(days: int, months: int, use_months: bool) -> str:
     if not months and not days:
         return "um ano"
     if not months:

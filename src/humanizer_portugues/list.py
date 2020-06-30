@@ -6,7 +6,7 @@ from typing import List
 __all__ = ["natural_list"]
 
 
-def natural_list(items: List, separator: str, conjunction: str = None) -> str:
+def natural_list(items: List[str], separator: str, conjunction: str = "") -> str:
     """Returns human readable list separated by separator.
 
     Optional argument is conjuntion that substitutes the last separator.

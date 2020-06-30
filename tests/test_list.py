@@ -8,9 +8,9 @@ from .base import HumanizeTestCase
 class ListTestCase(HumanizeTestCase):
     """Test case class for lists."""
 
-    def test_natural_list(self):
+    def test_natural_list(self) -> None:
         """Tests natural_list method."""
-        tests = (
+        tests = [
             ([], "", ""),
             (["jorbas"], ","),
             (["Jorbas"], ",", "and"),
@@ -18,8 +18,8 @@ class ListTestCase(HumanizeTestCase):
             (["jorbas", "maria"], ",", "e"),
             (["jorbas", "maria", "gustavo"], ";"),
             (["jorbas", "maria", "gustavo"], ";", "ou"),
-        )
-        results = (
+        ]
+        results = [
             "",
             "jorbas",
             "Jorbas",
@@ -27,5 +27,5 @@ class ListTestCase(HumanizeTestCase):
             "jorbas e maria",
             "jorbas; maria; gustavo",
             "jorbas; maria ou gustavo",
-        )
+        ]
         self.assertManyResults(humanizer_portugues.list.natural_list, tests, results)
