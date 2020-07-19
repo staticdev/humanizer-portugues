@@ -4,9 +4,10 @@ version = "2.3.2"
 description = "Humanize functions for Portuguese."
 authors = ["Thiago Carvalho D'Ávila <thiagocavila@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 repository = "https://github.com/staticdev/humanizer-portugues"
 homepage = "https://github.com/staticdev/humanizer-portugues"
+documentation = "https://humanizer-portugues.readthedocs.io"
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Programming Language :: Python',
@@ -15,6 +16,9 @@ classifiers = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
 ]
+
+[tool.poetry.urls]
+Changelog = "https://github.com/staticdev/humanizer-portugues/releases"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -33,6 +37,9 @@ coverage = {extras = ["toml"], version = "^5.2"}
 typeguard = "^2.9.1"
 pre-commit = "^2.6.0"
 pygments = "^2.6.1"
+xdoctest = "^0.13.0"
+sphinx = "^3.1.2"
+sphinx-autobuild = "^0.7.1"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
