@@ -62,111 +62,111 @@ Import the lib with:
 
 .. code-block:: python
 
-import humanizer_portugues
+   import humanizer_portugues
 
 
 Humanization of dates and time:
 
 .. code-block:: python
 
-import datetime
-humanizer_portugues.natural_period(datetime.time(5, 30, 0).hour)
-'manhã'
+   import datetime
+   humanizer_portugues.natural_period(datetime.time(5, 30, 0).hour)
+   'manhã'
 
-humanizer_portugues.natural_clock(datetime.time(0, 30, 0))
-'zero hora e trinta minutos'
+   humanizer_portugues.natural_clock(datetime.time(0, 30, 0))
+   'zero hora e trinta minutos'
 
-humanizer_portugues.natural_clock(datetime.time(0, 30, 0), formal=False)
-'meia noite e meia'
+   humanizer_portugues.natural_clock(datetime.time(0, 30, 0), formal=False)
+   'meia noite e meia'
 
-humanizer_portugues.natural_day(datetime.datetime.now())
-'hoje'
+   humanizer_portugues.natural_day(datetime.datetime.now())
+   'hoje'
 
-humanizer_portugues.natural_delta(datetime.timedelta(seconds=1001))
-'16 minutos'
+   humanizer_portugues.natural_delta(datetime.timedelta(seconds=1001))
+   '16 minutos'
 
-humanizer_portugues.natural_day(datetime.datetime.now() - datetime.timedelta(days=1))
-'ontem'
+   humanizer_portugues.natural_day(datetime.datetime.now() - datetime.timedelta(days=1))
+   'ontem'
 
-humanizer_portugues.natural_day(datetime.date(2007, 6, 5))
-'5 de junho'
+   humanizer_portugues.natural_day(datetime.date(2007, 6, 5))
+   '5 de junho'
 
-humanizer_portugues.natural_date(datetime.date(2007, 6, 5))
-'5 de junho de 2007'
+   humanizer_portugues.natural_date(datetime.date(2007, 6, 5))
+   '5 de junho de 2007'
 
-humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=1))
-'há um segundo'
+   humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=1))
+   'há um segundo'
 
-humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=3600))
-'há uma hora'
+   humanizer_portugues.natural_time(datetime.datetime.now() - datetime.timedelta(seconds=3600))
+   'há uma hora'
 
 
 Humanization filesizes:
 
 .. code-block:: python
 
-humanizer_portugues.natural_size(1000000)
-'1.0 MB'
+   humanizer_portugues.natural_size(1000000)
+   '1.0 MB'
 
-humanizer_portugues.natural_size(1000000, binary=True)
-'976.6 KiB'
+   humanizer_portugues.natural_size(1000000, binary=True)
+   '976.6 KiB'
 
-humanizer_portugues.natural_size(1000000, gnu=True)
-'976.6K'
+   humanizer_portugues.natural_size(1000000, gnu=True)
+   '976.6K'
 
 
 Humanization of integers:
 
 .. code-block:: python
 
-humanizer_portugues.int_comma(12345)
-'12,345'
+   humanizer_portugues.int_comma(12345)
+   '12,345'
 
-humanizer_portugues.int_word(123455913)
-'123.5 milhão'
+   humanizer_portugues.int_word(123455913)
+   '123.5 milhão'
 
-humanizer_portugues.int_word(12345591313)
-'12.3 bilhão'
+   humanizer_portugues.int_word(12345591313)
+   '12.3 bilhão'
 
-humanizer_portugues.ap_number(4)
-'quatro'
+   humanizer_portugues.ap_number(4)
+   'quatro'
 
-humanizer_portugues.ap_number(41)
-'41'
+   humanizer_portugues.ap_number(41)
+   '41'
 
 
 Humanization of floating point numbers:
 
 .. code-block:: python
 
-humanizer_portugues.fractional(1/3)
-'1/3'
+   humanizer_portugues.fractional(1/3)
+   '1/3'
 
-humanizer_portugues.fractional(1.5)
-'1 1/2'
+   humanizer_portugues.fractional(1.5)
+   '1 1/2'
 
-humanizer_portugues.fractional(0.3)
-'3/10'
+   humanizer_portugues.fractional(0.3)
+   '3/10'
 
-humanizer_portugues.fractional(0.333)
-'333/1000'
+   humanizer_portugues.fractional(0.333)
+   '333/1000'
 
-humanizer_portugues.fractional(1)
-'1'
+   humanizer_portugues.fractional(1)
+   '1'
 
 
 Humanization of lists:
 
 .. code-block:: python
 
-humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',')
-'Cláudio, Maria'
+   humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',')
+   'Cláudio, Maria'
 
-humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',', 'e')
-'Cláudio e Maria'
+   humanizer_portugues.natural_list(['Cláudio', 'Maria'], ',', 'e')
+   'Cláudio e Maria'
 
-humanizer_portugues.natural_list(['Cláudio', 'Maria', 'José'], ';', 'ou')
-'Cláudio; Maria ou José'
+   humanizer_portugues.natural_list(['Cláudio', 'Maria', 'José'], ';', 'ou')
+   'Cláudio; Maria ou José'
 
 
 Contributing
