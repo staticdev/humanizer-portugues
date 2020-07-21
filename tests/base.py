@@ -11,7 +11,7 @@ from unittest import TestCase
 class HumanizeTestCase(TestCase):
     """Parent test case class for this package."""
 
-    def assertManyResults(
+    def assert_many_results(
         self, function: Callable[..., Any], args: List[Any], results: List[Any],
     ) -> None:
         """Utility method for multiple assertions.
@@ -31,13 +31,13 @@ class HumanizeTestCase(TestCase):
             else:
                 self.assertEqual(function(arg), result)
 
-    def assertEqualDatetime(
+    def assert_equal_datetime(
         self, dt1: datetime.datetime, dt2: datetime.datetime
     ) -> None:
         """Utility method for comparing datetimes."""
         self.assertEqual((dt1 - dt2).seconds, 0)
 
-    def assertEqualTimedelta(
+    def assert_equal_timedelta(
         self, td1: datetime.timedelta, td2: datetime.timedelta
     ) -> None:
         """Utility method for comparing timedeltas."""

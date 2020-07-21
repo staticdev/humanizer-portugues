@@ -40,7 +40,7 @@ class NumberTestCase(HumanizeTestCase):
             "something else",
             None,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.number.ordinal, test_list, result_list
         )
 
@@ -76,7 +76,7 @@ class NumberTestCase(HumanizeTestCase):
             "1,234,567.1234567",
             None,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.number.int_comma, test_list, result_list
         )
 
@@ -118,7 +118,7 @@ class NumberTestCase(HumanizeTestCase):
             "1.23 milhão",
             "1" + "0" * 101,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.number.int_word, test_list, result_list
         )
 
@@ -126,7 +126,7 @@ class NumberTestCase(HumanizeTestCase):
         """Tests ap_number method."""
         test_list = [1, 2, 4, 5, 9, 10, "7", None]
         result_list = ["um", "dois", "quatro", "cinco", "nove", "10", "sete", None]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.number.ap_number, test_list, result_list
         )
 
@@ -134,6 +134,6 @@ class NumberTestCase(HumanizeTestCase):
         """Tests fractional method."""
         test_list = [1, 2.0, (4.0 / 3.0), (5.0 / 6.0), "7", "8.9", "dez", None]
         result_list = ["1", "2", "1 1/3", "5/6", "7", "8 9/10", "dez", None]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.number.fractional, test_list, result_list
         )

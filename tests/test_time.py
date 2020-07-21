@@ -43,8 +43,8 @@ class TimeUtilitiesTestCase(HumanizeTestCase):
             # Watch: https://github.com/staticdev/humanizer-portugues/issues/137
             for arg, result in zip(test, results):  # type: ignore
                 dtime, delta = humanizer_portugues.time.date_and_delta(arg)
-                self.assertEqualDatetime(dtime, result[0])
-                self.assertEqualTimedelta(delta, result[1])
+                self.assert_equal_datetime(dtime, result[0])
+                self.assert_equal_timedelta(delta, result[1])
         self.assertEqual(humanizer_portugues.time.date_and_delta("NaN"), (None, "NaN"))
 
 
@@ -77,7 +77,7 @@ class TimeTestCase(HumanizeTestCase):
             "vinte e uma horas",
             overflowtest,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_clock, test_list, result_list
         )
 
@@ -107,7 +107,7 @@ class TimeTestCase(HumanizeTestCase):
             "nove da noite",
             overflowtest,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             lambda d: humanizer_portugues.time.natural_clock(d, formal=False),
             test_list,
             result_list,
@@ -132,7 +132,7 @@ class TimeTestCase(HumanizeTestCase):
             "1 ano e 1 dia",
             "1 ano e 35 dias",
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             lambda d: humanizer_portugues.time.natural_delta(d, use_months=False),
             test_list,
             result_list,
@@ -208,7 +208,7 @@ class TimeTestCase(HumanizeTestCase):
             "um ano",
             "NaN",
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_delta, test_list, result_list
         )
 
@@ -272,7 +272,7 @@ class TimeTestCase(HumanizeTestCase):
             "há 1 ano e 4 dias",
             "NaN",
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_time, test_list, result_list
         )
 
@@ -340,7 +340,7 @@ class TimeTestCase(HumanizeTestCase):
             "há 1 ano e 4 dias",
             "NaN",
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             lambda d: humanizer_portugues.time.natural_time(d, use_months=False),
             test_list,
             result_list,
@@ -380,7 +380,7 @@ class TimeTestCase(HumanizeTestCase):
             valerrtest,
             overflowtest,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_day, test_list, result_list
         )
 
@@ -420,7 +420,7 @@ class TimeTestCase(HumanizeTestCase):
             valerrtest,
             overflowtest,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_date, test_list, result_list
         )
 
@@ -454,6 +454,6 @@ class TimeTestCase(HumanizeTestCase):
             valerrtest,
             overflowtest,
         ]
-        self.assertManyResults(
+        self.assert_many_results(
             humanizer_portugues.time.natural_year, test_list, result_list
         )
