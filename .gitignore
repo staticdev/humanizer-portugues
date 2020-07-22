@@ -131,5 +131,8 @@ dmypy.json
 # Pytype
 .pytype/
 
-# PyCharm
+# Pycharm
 .idea/
+
+# Visual Studio Code
+.vscode/
