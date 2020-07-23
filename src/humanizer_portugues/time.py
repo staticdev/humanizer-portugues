@@ -168,7 +168,7 @@ def _informal_time(value: datetime.time, hour: int) -> str:
 
 
 def natural_clock(value: Any, formal: bool = True) -> Any:
-    """Returns human-readable time.
+    """Return human-readable time.
 
     Compares time values to present time returns representing readable of time
     with the given day period.
@@ -205,7 +205,7 @@ def natural_clock(value: Any, formal: bool = True) -> Any:
 
 
 def abs_timedelta(delta: datetime.timedelta) -> datetime.timedelta:
-    """Returns an "absolute" value for a timedelta.
+    """Return an "absolute" value for a timedelta.
 
     Args:
         delta (datetime.timedelta): relative timedelta.
@@ -220,7 +220,7 @@ def abs_timedelta(delta: datetime.timedelta) -> datetime.timedelta:
 
 
 def date_and_delta(value: Any) -> Tuple[Any, Any]:
-    """Returns date and timedelta.
+    """Return date and timedelta.
 
     Turn a value into a date and a timedelta which represents how long ago
     it was. If that's not possible, return (None, value).
@@ -297,7 +297,7 @@ def more_than_one_year(years: int) -> str:
 
 
 def natural_delta(value: Any, use_months: bool = True) -> Any:
-    """Returns human-readable time difference.
+    """Return human-readable time difference.
 
     Given a timedelta or a number of seconds, return a natural
     representation of the amount of time elapsed. This is similar to
@@ -332,7 +332,7 @@ def natural_delta(value: Any, use_months: bool = True) -> Any:
 
 
 def natural_time(value: Any, future: bool = False, use_months: bool = True) -> Any:
-    """Returns human-readable time.
+    """Return human-readable time.
 
     Given a datetime or a number of seconds, return a natural representation
     of that time in a resolution that makes sense. This is more or less
@@ -367,7 +367,7 @@ def natural_time(value: Any, future: bool = False, use_months: bool = True) -> A
 
 
 def natural_day(value: Any, has_year: bool = False) -> Any:
-    """Returns human-readable day.
+    """Return human-readable day.
 
     For date values that are tomorrow, today or yesterday compared to
     present day returns representing string. Otherwise, returns a string
@@ -400,7 +400,7 @@ def natural_day(value: Any, has_year: bool = False) -> Any:
 
 
 def natural_year(value: Any) -> Any:
-    """Returns human-readable year.
+    """Return human-readable year.
 
     For date values that are last year, this year or next year compared to
     present year returns representing string. Otherwise, returns a string
@@ -428,7 +428,7 @@ def natural_year(value: Any) -> Any:
 
 
 def natural_date(value: Any) -> Any:
-    """Returns human-readable date.
+    """Return human-readable date.
 
     Like natural_day, but will append a year for dates that are a year
     ago or more.
