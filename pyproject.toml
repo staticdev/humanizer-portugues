@@ -33,7 +33,7 @@ mypy = "^0.782"
 pytest = "^6.0.1"
 coverage = {extras = ["toml"], version = "^5.2"}
 typeguard = "^2.9.1"
-pre-commit = "^2.6.0"
+pre-commit = "^2.7.1"
 pygments = "^2.6.1"
 xdoctest = "^0.13.0"
 sphinx = "^3.2.1"
