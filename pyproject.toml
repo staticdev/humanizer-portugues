@@ -35,7 +35,7 @@ coverage = {extras = ["toml"], version = "^5.2"}
 typeguard = "^2.9.1"
 pre-commit = "^2.7.1"
 pygments = "^2.6.1"
-xdoctest = "^0.13.0"
+xdoctest = "^0.14.0"
 sphinx = "^3.2.1"
 sphinx-autobuild = "^0.7.1"
 darglint = "^1.5.3"
