@@ -12,7 +12,10 @@ class HumanizeTestCase(TestCase):
     """Parent test case class for this package."""
 
     def assert_many_results(
-        self, function: Callable[..., Any], args: List[Any], results: List[Any],
+        self,
+        function: Callable[..., Any],
+        args: List[Any],
+        results: List[Any],
     ) -> None:
         """Utility method for multiple assertions.
 
