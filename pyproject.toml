@@ -34,7 +34,7 @@ pytest = "^6.2.1"
 coverage = {extras = ["toml"], version = "^5.3"}
 typeguard = "^2.10.0"
 pre-commit = "^2.9.3"
-pygments = "^2.7.3"
+pygments = "^2.7.4"
 xdoctest = "^0.15.0"
 sphinx = "^3.4.2"
 sphinx-autobuild = "^2020.9.1"
