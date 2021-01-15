@@ -113,7 +113,6 @@ def mypy(session: Session) -> None:
         session.run("mypy", f"--python-executable={sys.executable}", "noxfile.py")
 
 
-
 @nox.session(python=python_versions)
 def tests(session: Session) -> None:
     """Run the test suite."""
@@ -124,6 +123,7 @@ def tests(session: Session) -> None:
     finally:
         if session.interactive:
             session.notify("coverage")
+
 
 @nox.session
 def coverage(session: Session) -> None:
