@@ -1,6 +1,8 @@
 Humanizer Portugues
 ===================
 
+**SUPERSEEDED BY: https://github.com/staticdev/human-readable.**
+
 |PyPI| |Python Version| |License|
 
 |Read the Docs| |Tests| |Codecov|

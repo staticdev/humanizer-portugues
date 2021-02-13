@@ -9,13 +9,13 @@ repository = "https://github.com/staticdev/humanizer-portugues"
 homepage = "https://github.com/staticdev/humanizer-portugues"
 documentation = "https://humanizer-portugues.readthedocs.io"
 classifiers = [
-    'Development Status :: 5 - Production/Stable',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: MIT License',
+    "Development Status :: 7 - Inactive",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
 ]
 
 [tool.poetry.urls]
